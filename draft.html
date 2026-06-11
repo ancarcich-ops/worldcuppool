@@ -108,9 +108,11 @@
       <input id="search" type="search" placeholder="🔍 Search countries…" autocomplete="off">
       <button class="tbtn" id="undoBtn">↩ Undo</button>
       <button class="tbtn" id="modeBtn"></button>
+      <button class="tbtn" id="liveBtn">🔴 Go Live</button>
       <button class="tbtn primary" id="exportBtn">📤 Export picks</button>
       <button class="tbtn danger" id="resetBtn">⟲ Reset</button>
     </div>
+    <div id="syncNote" class="mode-note" style="margin:-6px 4px 12px;"></div>
     <div class="layout">
       <div class="groups" id="board"></div>
       <aside class="rosters">
@@ -119,6 +121,26 @@
       </aside>
     </div>
   </main>
+
+  <div class="overlay hidden" id="liveOverlay">
+    <div class="modal">
+      <h2>🔴 Go Live</h2>
+      <p>Live mode publishes every pick to the pool site so the whole group can follow along at this same link
+         (their pages refresh automatically). Only <b>this device</b> can make picks — everyone else watches.</p>
+      <p><b>One-time setup</b> (repo owner only):<br>
+         1. GitHub → Settings → Developer settings → <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" style="color:var(--blue)">Fine-grained tokens → Generate new token</a><br>
+         2. Repository access: <b>Only select repositories → worldcuppool</b><br>
+         3. Permissions → Repository permissions → <b>Contents: Read and write</b><br>
+         4. Generate, copy, and paste it below. It is stored only in this browser.</p>
+      <input id="tokenInput" type="password" placeholder="github_pat_…" autocomplete="off"
+        style="width:100%; background:#0c1122; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:12px; font:inherit;">
+      <div class="row">
+        <button class="tbtn primary" id="tokenSave">Start broadcasting</button>
+        <button class="tbtn" id="tokenClose">Cancel</button>
+        <button class="tbtn danger hidden" id="tokenForget">Stop live & forget token</button>
+      </div>
+    </div>
+  </div>
 
   <div class="overlay hidden" id="overlay">
     <div class="modal">
@@ -143,6 +165,97 @@
   const KEY = "wc26-draft-tracker";
 
   let state = load() || { mode: "snake", picks: [] }; // picks: [{ team, manager }]
+
+  // ── live sync (optional): commissioner publishes picks to the repo,
+  //    everyone else follows along read-only ──
+  const REPO = "ancarcich-ops/worldcuppool";
+  const BRANCH = "claude/tender-brahmagupta-cn1d5u";
+  const FILE_URL = `https://api.github.com/repos/${REPO}/contents/data/draft.json`;
+  const TOKEN_KEY = "wc26-draft-token";
+  let token = localStorage.getItem(TOKEN_KEY) || "";
+  let remoteSha = null;
+  let following = false; // true = read-only viewer
+  let publishTimer = null;
+
+  async function remoteGet() {
+    const headers = { Accept: "application/vnd.github+json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+    const res = await fetch(`${FILE_URL}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`, { headers, cache: "no-store" });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`GitHub ${res.status}`);
+    const data = await res.json();
+    return { sha: data.sha, json: JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, ""))))) };
+  }
+
+  async function remotePut(retry = true) {
+    if (!token) return;
+    const body = {
+      message: `draft: ${state.picks.length}/${TOTAL} picks`,
+      content: btoa(unescape(encodeURIComponent(JSON.stringify(state)))),
+      branch: BRANCH,
+    };
+    if (remoteSha) body.sha = remoteSha;
+    const res = await fetch(FILE_URL, {
+      method: "PUT",
+      headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (res.ok) {
+      remoteSha = (await res.json()).content.sha;
+      syncNote(`🟢 Live · ${state.picks.length}/${TOTAL} published`);
+    } else if ((res.status === 409 || res.status === 422) && retry) {
+      const cur = await remoteGet().catch(() => null);
+      remoteSha = cur?.sha || null;
+      return remotePut(false);
+    } else {
+      syncNote(`⚠️ Publish failed (HTTP ${res.status}) — picks are still saved on this device`);
+    }
+  }
+
+  function schedulePublish() {
+    if (!token) return;
+    clearTimeout(publishTimer);
+    publishTimer = setTimeout(() => remotePut().catch((e) => syncNote(`⚠️ ${e.message}`)), 700);
+  }
+
+  async function pollRemote() {
+    try {
+      const remote = await remoteGet();
+      if (remote && JSON.stringify(remote.json.picks) !== JSON.stringify(state.picks)) {
+        state = remote.json;
+        remoteSha = remote.sha;
+        render();
+      }
+      if (remote) syncNote(`👀 Watching live · ${state.picks.length}/${TOTAL} picks · updated ${new Date().toLocaleTimeString()}`);
+    } catch { /* transient — keep last good state */ }
+  }
+
+  function syncNote(msg) {
+    const el = document.querySelector("#syncNote");
+    if (el) el.textContent = msg;
+  }
+
+  async function init() {
+    if (token) {
+      // commissioner: adopt whichever side has more picks, then broadcast
+      const remote = await remoteGet().catch(() => null);
+      if (remote) {
+        remoteSha = remote.sha;
+        if ((remote.json.picks?.length || 0) > state.picks.length) { state = remote.json; save(); }
+      }
+      schedulePublish();
+    } else {
+      // no token: if a broadcast exists, follow it read-only
+      const remote = await remoteGet().catch(() => null);
+      if (remote && (remote.json.picks?.length || 0) >= state.picks.length) {
+        following = true;
+        state = remote.json;
+        setInterval(pollRemote, 75_000);
+        syncNote(`👀 Watching live · refreshes automatically`);
+      }
+    }
+    render();
+  }
 
   const $ = (s) => document.querySelector(s);
   const flag = (code) => `<img src="https://flagcdn.com/w40/${TEAMS[code].iso}.png" alt="" loading="lazy">`;
@@ -174,6 +287,10 @@
     $("#modeBtn").textContent = state.mode === "snake" ? "🐍 Snake draft" : "➡ Linear draft";
     $("#modeBtn").disabled = n > 0;
     $("#modeBtn").style.opacity = n > 0 ? 0.55 : 1;
+    $("#liveBtn").textContent = token ? "🟢 Live" : "🔴 Go Live";
+
+    // viewers follow read-only
+    ["#undoBtn", "#modeBtn", "#resetBtn", "#liveBtn"].forEach((s) => $(s).classList.toggle("hidden", following));
 
     renderBoard(justPicked);
     renderRosters(done ? null : managerAt(n));
@@ -192,7 +309,7 @@
         <div class="gtitle">GROUP ${g}${cleared ? " ✓" : ""}</div>
         ${visible.map((c) => {
           const owner = t.get(c);
-          return `<button class="chip ${owner ? "taken" : ""} ${c === justPicked ? "justPicked" : ""}" data-code="${c}" ${owner ? "disabled" : ""}>
+          return `<button class="chip ${owner ? "taken" : ""} ${c === justPicked ? "justPicked" : ""}" data-code="${c}" ${owner || following ? "disabled" : ""}>
             ${flag(c)}<span class="cname">${TEAMS[c].name}</span>
             ${owner ? `<span class="who">${owner}</span>` : ""}
           </button>`;
@@ -218,16 +335,16 @@
 
   // ── actions ──────────────────────────────────────────────────
   function pick(code) {
-    if (state.picks.length >= TOTAL || taken().has(code)) return;
+    if (following || state.picks.length >= TOTAL || taken().has(code)) return;
     state.picks.push({ team: code, manager: managerAt(state.picks.length) });
-    save();
+    save(); schedulePublish();
     $("#search").value = "";
     render(code);
   }
 
   $("#undoBtn").onclick = () => {
     if (!state.picks.length) return;
-    state.picks.pop(); save(); render();
+    state.picks.pop(); save(); schedulePublish(); render();
   };
   $("#modeBtn").onclick = () => {
     if (state.picks.length) return; // locked once drafting starts
@@ -235,9 +352,33 @@
     save(); render();
   };
   $("#resetBtn").onclick = () => {
-    if (confirm("Wipe ALL picks and start the draft over?")) { state.picks = []; save(); render(); }
+    if (confirm("Wipe ALL picks and start the draft over?")) { state.picks = []; save(); schedulePublish(); render(); }
   };
   $("#search").addEventListener("input", () => renderBoard());
+
+  // ── live mode controls ───────────────────────────────────────
+  $("#liveBtn").onclick = () => {
+    $("#tokenInput").value = token;
+    $("#tokenForget").classList.toggle("hidden", !token);
+    $("#liveOverlay").classList.remove("hidden");
+  };
+  $("#tokenSave").onclick = () => {
+    const t = $("#tokenInput").value.trim();
+    if (!t) return;
+    token = t; localStorage.setItem(TOKEN_KEY, t);
+    following = false;
+    $("#liveOverlay").classList.add("hidden");
+    syncNote("🟢 Live mode on — publishing picks…");
+    remotePut().catch((e) => syncNote(`⚠️ ${e.message}`));
+    render();
+  };
+  $("#tokenForget").onclick = () => {
+    token = ""; localStorage.removeItem(TOKEN_KEY);
+    $("#liveOverlay").classList.add("hidden");
+    syncNote("Live mode off — picks stay on this device only");
+    render();
+  };
+  $("#tokenClose").onclick = () => $("#liveOverlay").classList.add("hidden");
 
   // ── export ───────────────────────────────────────────────────
   $("#exportBtn").onclick = () => {
@@ -290,7 +431,8 @@ globalThis.POOL = POOL;
     })(t0);
   }
 
-  render();
+  render(); // immediate paint from local state
+  init();   // then adopt/begin live sync if available
 </script>
 </body>
 </html>
