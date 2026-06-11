@@ -1,4 +1,4 @@
-name: Update live results
+name: Update live results # trigger workflow registration
 
 on:
   schedule:
