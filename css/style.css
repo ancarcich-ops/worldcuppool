@@ -39,34 +39,56 @@ body {
   position: relative;
   padding: 44px 20px 30px;
   text-align: center;
-  background: linear-gradient(120deg, #0d1b3e, #1a0f3c, #3a0d33, #0d1b3e);
+  background: linear-gradient(120deg, #0a1f44, #15346b, #0a1f44, #7a1020, #0a1f44);
   background-size: 300% 300%;
-  animation: heroShift 14s ease infinite;
-  border-bottom: 1px solid var(--line);
+  animation: heroShift 16s ease infinite;
+  border-bottom: 3px solid var(--red);
   overflow: hidden;
+}
+/* red/white/blue accent stripe under the hero */
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, #B31942 0 33%, #ffffff 33% 66%, #0A3161 66% 100%);
+  opacity: 0.9;
 }
 @keyframes heroShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
 .hero-kicker {
   font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--blue); font-weight: 700; margin-bottom: 8px;
+  color: #ffffff; font-weight: 700; margin-bottom: 8px;
 }
 .hero-title {
   font-size: clamp(30px, 6vw, 54px);
   font-weight: 900; letter-spacing: -1px;
-  background: linear-gradient(90deg, var(--gold), #fff, var(--gold));
+  background: linear-gradient(90deg, #ffffff, #c8d4ff, #ffffff);
   background-size: 200%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 30px rgba(255, 255, 255, 0.15);
   animation: shimmer 5s linear infinite;
 }
 @keyframes shimmer { to { background-position: 200%; } }
 
-.hero-stats { display: flex; gap: 26px; justify-content: center; margin: 20px 0 8px; flex-wrap: wrap; }
+/* faint star field for a touch of USA flair */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 30%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.5px 1.5px at 22% 70%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 38% 22%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 62% 60%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 78% 28%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(2px 2px at 88% 66%, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1.5px 1.5px at 50% 80%, rgba(255,255,255,0.45), transparent);
+}
+
+.hero-stats { display: flex; gap: 26px; justify-content: center; margin: 20px 0 8px; position: relative; flex-wrap: wrap; }
 .stat b { font-size: 26px; display: block; color: #fff; }
 .stat span { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
 .stat-live b { color: var(--red); animation: pulse 1.4s ease infinite; }
 .updated-at { font-size: 12px; color: var(--muted); }
+
+.hero-inner { position: relative; z-index: 1; }
 
 .hero-ball {
   position: absolute; font-size: 120px; opacity: 0.08;
