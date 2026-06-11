@@ -186,12 +186,17 @@ main { max-width: 1060px; margin: 18px auto 60px; padding: 0 16px; }
   padding: 16px; animation: fadeUp 0.5s ease backwards;
 }
 .group-title { font-weight: 800; font-size: 15px; letter-spacing: 1px; margin-bottom: 10px; color: var(--gold); }
-.group-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-.group-table th { color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; padding: 4px 6px; text-align: center; }
-.group-table td { padding: 7px 6px; text-align: center; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.group-table { width: 100%; border-collapse: collapse; font-size: 13.5px; table-layout: fixed; }
+.group-table th { color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; padding: 4px 2px; text-align: center; }
+.group-table th:first-child { width: 22px; }
+.group-table th:nth-child(n+3):nth-child(-n+6) { width: 24px; } /* P W D L */
+.group-table th:nth-child(7), .group-table th:nth-child(8) { width: 34px; } /* GD, Pts */
+.group-table td { padding: 7px 2px; text-align: center; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 .group-table .tl { text-align: left; }
-.team-cell { display: flex; align-items: center; gap: 8px; font-weight: 600; white-space: nowrap; }
-.team-cell .flag { width: 24px; border-radius: 3px; }
+.team-cell { display: flex; align-items: center; gap: 7px; font-weight: 600; white-space: nowrap; overflow: hidden; }
+.team-cell .flag { width: 24px; border-radius: 3px; flex-shrink: 0; }
+.team-cell span { overflow: hidden; text-overflow: ellipsis; }
+.team-cell .owner-tag { flex-shrink: 0; max-width: 80px; }
 .pos { color: var(--muted); font-weight: 700; }
 tr.q-auto .pos { color: var(--green); }
 tr.q-maybe .pos { color: var(--gold); }
