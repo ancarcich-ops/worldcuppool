@@ -3,241 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Draft Order Reveal · World Cup Pool 2026</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+<title>Draft Tracker · World Cup Pool 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link rel="preconnect" href="https://flagcdn.com">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --gold: #ffd166; --red: #B31942; --navy: #0A3161; }
-  html, body { height: 100%; }
-  body {
-    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-    background: radial-gradient(ellipse 90% 90% at 50% 30%, #14233f, #060a16 70%);
-    color: #eef2ff; min-height: 100vh; overflow: hidden;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  :root {
+    --bg: #0a0e1a; --card: #131a2e; --card2: #1a2340; --line: rgba(255,255,255,0.09);
+    --text: #eef2ff; --muted: #8b96b8; --gold: #ffd166; --green: #3ddc84; --red: #ff5d73; --blue: #4dccff;
   }
-  .stripes { position: fixed; inset: 0; z-index: -2; opacity: 0.08;
-    background: repeating-linear-gradient(180deg, var(--red) 0 48px, #fff 48px 96px); }
-  .glow { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background: radial-gradient(50vw 40vh at 50% 0%, rgba(77,204,255,0.12), transparent 60%),
-                radial-gradient(50vw 40vh at 50% 100%, rgba(255,93,115,0.1), transparent 60%); }
+  body { font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  /* ── Intro ── */
-  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
-  .kicker { font-size: clamp(11px, 2.4vw, 14px); letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 800; margin-bottom: 14px; }
-  .big-title { font-size: clamp(34px, 9vw, 86px); font-weight: 900; letter-spacing: -2px; line-height: 1;
-    background: linear-gradient(90deg, #fff, var(--gold), #fff); background-size: 200%;
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    animation: shimmer 4s linear infinite; }
-  @keyframes shimmer { to { background-position: 200%; } }
-  .sub { margin-top: 18px; color: #aeb8d6; font-size: clamp(14px, 3vw, 18px); }
-  .btn {
-    margin-top: 38px; border: none; cursor: pointer; font: inherit; font-weight: 800;
-    font-size: clamp(16px, 3.4vw, 20px); letter-spacing: 1px; text-transform: uppercase;
-    color: #06122e; padding: 18px 42px; border-radius: 999px;
-    background: linear-gradient(135deg, var(--gold), #ffae42);
-    box-shadow: 0 10px 40px rgba(255,209,102,0.45); transition: transform .15s, box-shadow .15s;
+  /* ── on the clock header ── */
+  .clock {
+    position: sticky; top: 0; z-index: 20; text-align: center;
+    padding: 18px 16px 14px; border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse 90% 160% at 50% 60%, rgba(5,12,30,0.96) 35%, rgba(5,12,30,0.8) 70%, rgba(5,12,30,0.55) 100%),
+      repeating-linear-gradient(180deg, #B31942 0 22px, #e9ebf5 22px 44px);
   }
-  .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 50px rgba(255,209,102,0.6); }
-  .btn:active { transform: translateY(0) scale(.98); }
+  .clock-kicker { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 800; }
+  .clock-name { font-size: clamp(30px, 7vw, 52px); font-weight: 900; letter-spacing: -1px; text-transform: capitalize; line-height: 1.15;
+    text-shadow: 0 2px 14px rgba(5,12,30,0.95); }
+  .clock-name.done { color: var(--gold); }
+  .clock-sub { font-size: 13px; color: #c2cbe6; margin-top: 2px; text-shadow: 0 1px 6px rgba(5,12,30,0.9); }
+  .clock-sub b { color: #fff; text-transform: capitalize; }
+  .progress { height: 5px; background: rgba(255,255,255,0.12); border-radius: 99px; max-width: 480px; margin: 12px auto 0; overflow: hidden; }
+  .progress i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold), #ff9f1c); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .toolbar input {
+    flex: 1; min-width: 160px; background: var(--card); border: 1px solid var(--line); color: var(--text);
+    font: inherit; font-size: 15px; padding: 10px 16px; border-radius: 999px; outline: none;
+  }
+  .toolbar input:focus { border-color: var(--gold); }
+  .tbtn {
+    border: 1px solid var(--line); background: var(--card); color: var(--text); font: inherit; font-size: 13px;
+    font-weight: 700; padding: 10px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  }
+  .tbtn:hover { border-color: var(--gold); color: var(--gold); }
+  .tbtn.danger:hover { border-color: var(--red); color: var(--red); }
+  .tbtn.primary { background: linear-gradient(135deg, var(--gold), #ffae42); color: #06122e; border-color: transparent; }
+  .mode-note { font-size: 12px; color: var(--muted); }
+
+  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ── country board ── */
+  .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .gcard { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; }
+  .gtitle { font-size: 12px; font-weight: 800; letter-spacing: 1px; color: var(--gold); margin-bottom: 8px; }
+  .chip {
+    display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
+    background: var(--card2); border: 1px solid transparent; border-radius: 10px;
+    padding: 7px 9px; margin-bottom: 6px; cursor: pointer; color: var(--text); font: inherit; font-size: 14px; font-weight: 600;
+    transition: transform .12s, border-color .12s; position: relative;
+  }
+  .chip:last-child { margin-bottom: 0; }
+  .chip:hover:not(.taken) { transform: translateX(3px); border-color: var(--gold); }
+  .chip img { width: 26px; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.5); flex-shrink: 0; }
+  .chip.taken { opacity: 0.45; cursor: default; }
+  .chip.taken img { filter: grayscale(.85); }
+  .chip.taken .cname { text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.5); }
+  .chip .who { margin-left: auto; font-size: 10.5px; font-weight: 800; color: var(--blue); text-transform: capitalize; white-space: nowrap; }
+  .chip.justPicked { animation: flash .9s ease; }
+  @keyframes flash { 0% { background: rgba(255,209,102,0.5); } 100% { background: var(--card2); } }
+  .gcard.cleared { opacity: 0.55; }
+
+  /* ── rosters sidebar ── */
+  .rosters { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; max-height: 80vh; overflow-y: auto; position: sticky; top: 130px; }
+  .rosters h3 { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .ros { display: flex; align-items: center; gap: 8px; padding: 7px 6px; border-radius: 10px; border-bottom: 1px solid var(--line); }
+  .ros:last-child { border-bottom: none; }
+  .ros.onclock { background: rgba(255,209,102,0.1); border: 1px solid rgba(255,209,102,0.4); }
+  .ros .ord { font-size: 11px; color: var(--muted); width: 18px; font-weight: 800; flex-shrink: 0; }
+  .ros .rname { font-weight: 700; font-size: 14px; text-transform: capitalize; width: 76px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ros .picks { display: flex; gap: 5px; margin-left: auto; }
+  .ros .picks img { width: 24px; border-radius: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+  .ros .slot { width: 24px; height: 17px; border: 1px dashed rgba(255,255,255,0.22); border-radius: 3px; }
+
+  /* ── export overlay ── */
+  .overlay { position: fixed; inset: 0; background: rgba(4,7,16,0.85); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 18px; }
+  .modal { background: var(--card); border: 1px solid var(--line); border-radius: 18px; max-width: 640px; width: 100%; padding: 24px; max-height: 88vh; overflow-y: auto; }
+  .modal h2 { margin-bottom: 8px; }
+  .modal p { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 14px; }
+  .modal textarea { width: 100%; height: 240px; background: #0c1122; color: #cfe3ff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font: 12px/1.5 ui-monospace, Consolas, monospace; }
+  .modal .row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
   .hidden { display: none !important; }
-
-  /* ── Reveal stage ── */
-  #stage { width: 100%; max-width: 760px; }
-  .counter { font-size: clamp(11px, 2.4vw, 13px); letter-spacing: 3px; text-transform: uppercase; color: #8b96b8; margin-bottom: 18px; font-weight: 700; }
-  .counter b { color: var(--gold); }
-
-  .pickbox { perspective: 1200px; min-height: 150px; display: flex; align-items: center; justify-content: center; }
-  .card {
-    display: flex; align-items: center; gap: clamp(16px, 4vw, 30px);
-    background: linear-gradient(135deg, #1a2340, #131a2e);
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 22px;
-    padding: clamp(20px, 4vw, 32px) clamp(26px, 6vw, 54px);
-    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
-  }
-  .card.pop { animation: pop .85s cubic-bezier(.18,.9,.25,1.2); }
-  @keyframes pop {
-    0% { transform: rotateX(75deg) translateY(40px) scale(.7); opacity: 0; filter: blur(6px); }
-    55% { transform: rotateX(-8deg) translateY(0) scale(1.06); opacity: 1; filter: blur(0); }
-    100% { transform: rotateX(0) scale(1); }
-  }
-  .pick-num {
-    font-size: clamp(40px, 12vw, 96px); font-weight: 900; line-height: 1;
-    width: clamp(70px, 16vw, 150px); text-align: center;
-    background: linear-gradient(180deg, var(--gold), #ff9f1c);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    flex-shrink: 0;
-  }
-  .pick-divider { width: 2px; align-self: stretch; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.25), transparent); }
-  .pick-name { font-size: clamp(34px, 9vw, 74px); font-weight: 900; letter-spacing: -1px; text-transform: capitalize; }
-  .pick-tag { display: block; font-size: clamp(10px, 2.4vw, 13px); letter-spacing: 3px; text-transform: uppercase; color: #8b96b8; font-weight: 700; margin-top: 4px; }
-  .pick-tag.first { color: var(--gold); }
-  .pick-tag.last { color: #ff8a9b; }
-
-  .controls { margin-top: 36px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
-
-  /* ── Board (final list) ── */
-  #board { width: 100%; max-width: 720px; max-height: 88vh; overflow-y: auto; }
-  .board-title { text-align: center; font-size: clamp(24px, 6vw, 40px); font-weight: 900; margin-bottom: 6px;
-    background: linear-gradient(90deg, #fff, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .board-sub { text-align: center; color: #aeb8d6; margin-bottom: 22px; font-size: 14px; }
-  .board-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .board-row { display: flex; align-items: center; gap: 14px; background: #131a2e; border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px; padding: 12px 18px; animation: slideIn .4s ease backwards; }
-  .board-row.first { border-color: rgba(255,209,102,0.5); background: linear-gradient(90deg, rgba(255,209,102,0.08), #131a2e); }
-  .board-row.last { border-color: rgba(255,138,155,0.4); }
-  @keyframes slideIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
-  .board-num { font-size: 22px; font-weight: 900; color: var(--gold); width: 34px; flex-shrink: 0; }
-  .board-name { font-size: 19px; font-weight: 700; text-transform: capitalize; }
-  .board-row.first .board-num { font-size: 26px; }
-  @media (max-width: 560px) { .board-grid { grid-template-columns: 1fr; } }
-
-  canvas.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+  canvas.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 99; }
 </style>
 </head>
 <body>
-  <div class="stripes"></div>
-  <div class="glow"></div>
+  <header class="clock">
+    <div class="clock-kicker" id="pickLabel">Draft Tracker</div>
+    <div class="clock-name" id="onClock">—</div>
+    <div class="clock-sub" id="nextUp"></div>
+    <div class="progress"><i id="bar" style="width:0%"></i></div>
+  </header>
 
-  <!-- Intro -->
-  <section id="intro" class="screen">
-    <div class="kicker">⚽ World Cup Pool 2026 · United States</div>
-    <h1 class="big-title">THE DRAFT<br>ORDER</h1>
-    <p class="sub">16 managers. 48 nations. One shot at glory.<br>The order has been randomized. Let's reveal it — one pick at a time.</p>
-    <button class="btn" id="startBtn">🎲 Start the Reveal</button>
-  </section>
-
-  <!-- Reveal -->
-  <section id="reveal" class="screen hidden">
-    <div class="counter">Pick <b id="cNow">0</b> of 16</div>
-    <div id="stage">
-      <div class="pickbox"><div id="card"></div></div>
+  <main>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="🔍 Search countries…" autocomplete="off">
+      <button class="tbtn" id="undoBtn">↩ Undo</button>
+      <button class="tbtn" id="modeBtn"></button>
+      <button class="tbtn primary" id="exportBtn">📤 Export picks</button>
+      <button class="tbtn danger" id="resetBtn">⟲ Reset</button>
     </div>
-    <div class="controls">
-      <button class="btn" id="nextBtn">Reveal Pick #1 →</button>
+    <div class="layout">
+      <div class="groups" id="board"></div>
+      <aside class="rosters">
+        <h3>Rosters</h3>
+        <div id="rosters"></div>
+      </aside>
     </div>
-  </section>
+  </main>
 
-  <!-- Final board -->
-  <section id="boardScreen" class="screen hidden">
-    <div id="board">
-      <div class="board-title">🏆 Official Draft Order</div>
-      <div class="board-sub">World Cup Pool 2026 · drafting begins with pick #1</div>
-      <div class="board-grid" id="boardGrid"></div>
-      <div style="text-align:center; margin-top:24px;">
-        <button class="btn" id="replayBtn" style="font-size:15px; padding:14px 30px;">↻ Replay Reveal</button>
+  <div class="overlay hidden" id="overlay">
+    <div class="modal">
+      <h2 id="modalTitle">📤 Export picks</h2>
+      <p>This is the <b>data/pool.js</b> roster block. Copy it and paste it to Claude (or straight into the repo) and the
+         dashboard updates with the real draft.</p>
+      <textarea id="exportText" readonly></textarea>
+      <div class="row">
+        <button class="tbtn primary" id="copyBtn">📋 Copy to clipboard</button>
+        <button class="tbtn" id="closeBtn">Close</button>
       </div>
     </div>
-  </section>
+  </div>
 
+<script src="data/teams.js"></script>
 <script>
-  // Draft order — randomized via crypto Fisher-Yates, locked in.
+  // Official draft order (crypto-random draw, June 11 2026)
   const ORDER = ["chazz","zach","trevor","corbin","parker","ryan","petey","brett","kranz","grant","heacock","matt","adam","andrew","ari","bako"];
+  const ROUNDS = 3; // 16 managers × 3 picks = 48 nations
+  const TOTAL = ORDER.length * ROUNDS;
+  const AVATARS = ["🦅","🐯","🦈","🐺","🦁","🐻","🦊","🐙","🦂","🐉","🦬","🐎","🦉","🐍","🦜","🐊"];
+  const KEY = "wc26-draft-tracker";
+
+  let state = load() || { mode: "snake", picks: [] }; // picks: [{ team, manager }]
 
   const $ = (s) => document.querySelector(s);
-  const intro = $("#intro"), reveal = $("#reveal"), boardScreen = $("#boardScreen");
-  const card = $("#card"), cNow = $("#cNow"), nextBtn = $("#nextBtn");
-  let idx = 0;
+  const flag = (code) => `<img src="https://flagcdn.com/w40/${TEAMS[code].iso}.png" alt="" loading="lazy">`;
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-  const TAGS = { first: "🥇 First Overall Pick", last: "🪣 Last Pick · Wooden Spoon of the Draft" };
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch { return null; } }
+  function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
 
-  function show(el) { [intro, reveal, boardScreen].forEach(s => s.classList.add("hidden")); el.classList.remove("hidden"); }
+  function managerAt(pickIdx) {
+    const round = Math.floor(pickIdx / ORDER.length);
+    const pos = pickIdx % ORDER.length;
+    const reversed = state.mode === "snake" && round % 2 === 1;
+    return ORDER[reversed ? ORDER.length - 1 - pos : pos];
+  }
+  const taken = () => new Map(state.picks.map((p) => [p.team, p.manager]));
+  const picksOf = (m) => state.picks.filter((p) => p.manager === m).map((p) => p.team);
 
-  function buildDrumroll() {
-    // brief shuffle of random names before the real one lands
-    const pool = ORDER.filter((_, i) => i !== idx);
-    let ticks = 0;
-    const total = 14;
-    const spin = () => {
-      const n = pool[Math.floor(Math.random() * pool.length)];
-      card.className = "";
-      card.innerHTML = `
-        <div class="pick-num">${idx + 1}</div>
-        <div class="pick-divider"></div>
-        <div><div class="pick-name" style="opacity:.55">${n}</div></div>`;
-      ticks++;
-      if (ticks < total) setTimeout(spin, 60 + ticks * 11);
-      else landPick();
-    };
-    spin();
+  // ── rendering ────────────────────────────────────────────────
+  function render(justPicked) {
+    const n = state.picks.length;
+    const done = n >= TOTAL;
+    $("#pickLabel").textContent = done ? "🏁 Draft complete!" : `On the clock — Pick ${n + 1} of ${TOTAL} · Round ${Math.floor(n / ORDER.length) + 1}`;
+    $("#onClock").textContent = done ? "Draft Complete 🎉" : managerAt(n);
+    $("#onClock").classList.toggle("done", done);
+    $("#nextUp").innerHTML = done
+      ? `All 48 nations are off the board. Hit <b>Export picks</b>!`
+      : n + 1 < TOTAL ? `Next up: <b>${managerAt(n + 1)}</b>${n + 2 < TOTAL ? ` · then <b>${managerAt(n + 2)}</b>` : ""}` : `Last pick of the draft!`;
+    $("#bar").style.width = `${(n / TOTAL) * 100}%`;
+    $("#modeBtn").textContent = state.mode === "snake" ? "🐍 Snake draft" : "➡ Linear draft";
+    $("#modeBtn").disabled = n > 0;
+    $("#modeBtn").style.opacity = n > 0 ? 0.55 : 1;
+
+    renderBoard(justPicked);
+    renderRosters(done ? null : managerAt(n));
+    if (done && justPicked) confetti();
   }
 
-  function landPick() {
-    const name = ORDER[idx];
-    const tagClass = idx === 0 ? "first" : idx === 15 ? "last" : "";
-    const tag = idx === 0 ? TAGS.first : idx === 15 ? TAGS.last : `Pick ${idx + 1} of 16`;
-    card.className = "card pop";
-    card.innerHTML = `
-      <div class="pick-num">${idx + 1}</div>
-      <div class="pick-divider"></div>
-      <div>
-        <div class="pick-name">${name}</div>
-        <span class="pick-tag ${tagClass}">${tag}</span>
+  function renderBoard(justPicked) {
+    const t = taken();
+    const q = $("#search").value.trim().toLowerCase();
+    $("#board").innerHTML = GROUPS.map((g) => {
+      const codes = Object.keys(TEAMS).filter((c) => TEAMS[c].group === g);
+      const visible = codes.filter((c) => !q || TEAMS[c].name.toLowerCase().includes(q) || c.toLowerCase().includes(q));
+      if (!visible.length) return "";
+      const cleared = codes.every((c) => t.has(c));
+      return `<div class="gcard ${cleared ? "cleared" : ""}">
+        <div class="gtitle">GROUP ${g}${cleared ? " ✓" : ""}</div>
+        ${visible.map((c) => {
+          const owner = t.get(c);
+          return `<button class="chip ${owner ? "taken" : ""} ${c === justPicked ? "justPicked" : ""}" data-code="${c}" ${owner ? "disabled" : ""}>
+            ${flag(c)}<span class="cname">${TEAMS[c].name}</span>
+            ${owner ? `<span class="who">${owner}</span>` : ""}
+          </button>`;
+        }).join("")}
       </div>`;
-    cNow.textContent = idx + 1;
-    if (idx === 0) burst(70);
-    if (idx === ORDER.length - 1) {
-      nextBtn.textContent = "See the Full Board →";
-      nextBtn.onclick = showBoard;
-    } else {
-      nextBtn.textContent = `Reveal Pick #${idx + 2} →`;
-    }
-    nextBtn.disabled = false;
+    }).join("");
+
+    document.querySelectorAll(".chip:not(.taken)").forEach((b) => b.addEventListener("click", () => pick(b.dataset.code)));
   }
 
-  function nextPick() {
-    if (idx >= ORDER.length) return showBoard();
-    nextBtn.disabled = true;
-    buildDrumroll();
-    idx++;
+  function renderRosters(onClock) {
+    $("#rosters").innerHTML = ORDER.map((m, i) => {
+      const ps = picksOf(m);
+      return `<div class="ros ${m === onClock ? "onclock" : ""}">
+        <span class="ord">${i + 1}</span><span class="rname">${m}</span>
+        <span class="picks">
+          ${ps.map((c) => `<span title="${TEAMS[c].name}">${flag(c)}</span>`).join("")}
+          ${Array.from({ length: ROUNDS - ps.length }, () => `<span class="slot"></span>`).join("")}
+        </span>
+      </div>`;
+    }).join("");
   }
 
-  function showBoard() {
-    show(boardScreen);
-    const grid = $("#boardGrid");
-    grid.innerHTML = ORDER.map((n, i) => `
-      <div class="board-row ${i === 0 ? "first" : i === ORDER.length - 1 ? "last" : ""}" style="animation-delay:${i * 55}ms">
-        <span class="board-num">${i + 1}</span>
-        <span class="board-name">${n}</span>
-        ${i === 0 ? '<span style="margin-left:auto">🥇</span>' : i === ORDER.length - 1 ? '<span style="margin-left:auto">🪣</span>' : ""}
-      </div>`).join("");
-    burst(160);
+  // ── actions ──────────────────────────────────────────────────
+  function pick(code) {
+    if (state.picks.length >= TOTAL || taken().has(code)) return;
+    state.picks.push({ team: code, manager: managerAt(state.picks.length) });
+    save();
+    $("#search").value = "";
+    render(code);
   }
 
-  $("#startBtn").onclick = () => { show(reveal); };
-  nextBtn.onclick = nextPick;
-  $("#replayBtn").onclick = () => { idx = 0; cNow.textContent = "0"; card.className = ""; card.innerHTML = ""; nextBtn.textContent = "Reveal Pick #1 →"; nextBtn.onclick = nextPick; show(reveal); };
+  $("#undoBtn").onclick = () => {
+    if (!state.picks.length) return;
+    state.picks.pop(); save(); render();
+  };
+  $("#modeBtn").onclick = () => {
+    if (state.picks.length) return; // locked once drafting starts
+    state.mode = state.mode === "snake" ? "linear" : "snake";
+    save(); render();
+  };
+  $("#resetBtn").onclick = () => {
+    if (confirm("Wipe ALL picks and start the draft over?")) { state.picks = []; save(); render(); }
+  };
+  $("#search").addEventListener("input", () => renderBoard());
 
-  // ── confetti ──
-  function burst(count) {
+  // ── export ───────────────────────────────────────────────────
+  $("#exportBtn").onclick = () => {
+    const lines = ORDER.map((m, i) => {
+      const ps = picksOf(m);
+      const teams = ps.map((c) => `"${c}"`).join(", ");
+      return `    { name: "${cap(m)}", avatar: "${AVATARS[i % AVATARS.length]}", teams: [${teams}] },`;
+    });
+    $("#modalTitle").textContent = state.picks.length >= TOTAL ? "🏁 Draft complete — export" : `📤 Export (${state.picks.length}/${TOTAL} picks so far)`;
+    $("#exportText").value = `const POOL = {
+  settings: {
+    poolName: "World Cup Pool 2026",
+    sampleDraft: false,
+  },
+
+  players: [
+${lines.join("\n")}
+  ],
+};
+
+globalThis.POOL = POOL;
+`;
+    $("#overlay").classList.remove("hidden");
+  };
+  $("#copyBtn").onclick = async () => {
+    const ta = $("#exportText");
+    try { await navigator.clipboard.writeText(ta.value); $("#copyBtn").textContent = "✅ Copied!"; }
+    catch { ta.select(); document.execCommand("copy"); $("#copyBtn").textContent = "✅ Copied!"; }
+    setTimeout(() => ($("#copyBtn").textContent = "📋 Copy to clipboard"), 1600);
+  };
+  $("#closeBtn").onclick = () => $("#overlay").classList.add("hidden");
+
+  // ── confetti ─────────────────────────────────────────────────
+  function confetti() {
     const cv = document.createElement("canvas");
     cv.className = "confetti"; document.body.appendChild(cv);
     const ctx = cv.getContext("2d"); cv.width = innerWidth; cv.height = innerHeight;
-    const colors = ["#FFD700","#B31942","#0A3161","#ffffff","#4DCCFF","#FF9F1C"];
-    const parts = Array.from({ length: count }, () => ({
-      x: innerWidth / 2 + (Math.random() - 0.5) * 200, y: innerHeight * 0.4,
-      r: 4 + Math.random() * 7, c: colors[(Math.random() * colors.length) | 0],
-      vx: (Math.random() - 0.5) * 12, vy: -6 - Math.random() * 9, rot: Math.random() * 6, vr: -.2 + Math.random() * .4,
+    const colors = ["#FFD700","#B31942","#0A3161","#ffffff","#4DCCFF","#3ddc84"];
+    const parts = Array.from({ length: 200 }, () => ({
+      x: Math.random() * cv.width, y: -20 - Math.random() * cv.height * .4,
+      r: 4 + Math.random() * 6, c: colors[(Math.random() * colors.length) | 0],
+      vy: 2.5 + Math.random() * 3.5, vx: -1.5 + Math.random() * 3, rot: Math.random() * 6, vr: -.15 + Math.random() * .3,
     }));
     const t0 = performance.now();
     (function tick(t) {
       ctx.clearRect(0, 0, cv.width, cv.height);
-      for (const p of parts) {
-        p.vy += 0.28; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
-        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-        ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); ctx.restore();
-      }
-      if (t - t0 < 2600) requestAnimationFrame(tick); else cv.remove();
+      for (const p of parts) { p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot); ctx.fillStyle = p.c; ctx.fillRect(-p.r/2, -p.r/4, p.r, p.r/2); ctx.restore(); }
+      if (t - t0 < 5000) requestAnimationFrame(tick); else cv.remove();
     })(t0);
   }
 
-  // keyboard: space/enter advances
-  addEventListener("keydown", (e) => {
-    if ((e.code === "Space" || e.code === "Enter")) {
-      if (!intro.classList.contains("hidden")) $("#startBtn").click();
-      else if (!reveal.classList.contains("hidden") && !nextBtn.disabled) nextBtn.click();
-      e.preventDefault();
-    }
-  });
+  render();
 </script>
 </body>
 </html>
