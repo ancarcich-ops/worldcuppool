@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Order Reveal · World Cup Pool 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --gold: #ffd166; --red: #B31942; --navy: #0A3161; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    background: radial-gradient(ellipse 90% 90% at 50% 30%, #14233f, #060a16 70%);
+    color: #eef2ff; min-height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .stripes { position: fixed; inset: 0; z-index: -2; opacity: 0.08;
+    background: repeating-linear-gradient(180deg, var(--red) 0 48px, #fff 48px 96px); }
+  .glow { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(50vw 40vh at 50% 0%, rgba(77,204,255,0.12), transparent 60%),
+                radial-gradient(50vw 40vh at 50% 100%, rgba(255,93,115,0.1), transparent 60%); }
+
+  /* ── Intro ── */
+  .screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .kicker { font-size: clamp(11px, 2.4vw, 14px); letter-spacing: 4px; text-transform: uppercase; color: var(--gold); font-weight: 800; margin-bottom: 14px; }
+  .big-title { font-size: clamp(34px, 9vw, 86px); font-weight: 900; letter-spacing: -2px; line-height: 1;
+    background: linear-gradient(90deg, #fff, var(--gold), #fff); background-size: 200%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite; }
+  @keyframes shimmer { to { background-position: 200%; } }
+  .sub { margin-top: 18px; color: #aeb8d6; font-size: clamp(14px, 3vw, 18px); }
+  .btn {
+    margin-top: 38px; border: none; cursor: pointer; font: inherit; font-weight: 800;
+    font-size: clamp(16px, 3.4vw, 20px); letter-spacing: 1px; text-transform: uppercase;
+    color: #06122e; padding: 18px 42px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--gold), #ffae42);
+    box-shadow: 0 10px 40px rgba(255,209,102,0.45); transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 50px rgba(255,209,102,0.6); }
+  .btn:active { transform: translateY(0) scale(.98); }
+  .hidden { display: none !important; }
+
+  /* ── Reveal stage ── */
+  #stage { width: 100%; max-width: 760px; }
+  .counter { font-size: clamp(11px, 2.4vw, 13px); letter-spacing: 3px; text-transform: uppercase; color: #8b96b8; margin-bottom: 18px; font-weight: 700; }
+  .counter b { color: var(--gold); }
+
+  .pickbox { perspective: 1200px; min-height: 150px; display: flex; align-items: center; justify-content: center; }
+  .card {
+    display: flex; align-items: center; gap: clamp(16px, 4vw, 30px);
+    background: linear-gradient(135deg, #1a2340, #131a2e);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 22px;
+    padding: clamp(20px, 4vw, 32px) clamp(26px, 6vw, 54px);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+  }
+  .card.pop { animation: pop .85s cubic-bezier(.18,.9,.25,1.2); }
+  @keyframes pop {
+    0% { transform: rotateX(75deg) translateY(40px) scale(.7); opacity: 0; filter: blur(6px); }
+    55% { transform: rotateX(-8deg) translateY(0) scale(1.06); opacity: 1; filter: blur(0); }
+    100% { transform: rotateX(0) scale(1); }
+  }
+  .pick-num {
+    font-size: clamp(40px, 12vw, 96px); font-weight: 900; line-height: 1;
+    width: clamp(70px, 16vw, 150px); text-align: center;
+    background: linear-gradient(180deg, var(--gold), #ff9f1c);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    flex-shrink: 0;
+  }
+  .pick-divider { width: 2px; align-self: stretch; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.25), transparent); }
+  .pick-name { font-size: clamp(34px, 9vw, 74px); font-weight: 900; letter-spacing: -1px; text-transform: capitalize; }
+  .pick-tag { display: block; font-size: clamp(10px, 2.4vw, 13px); letter-spacing: 3px; text-transform: uppercase; color: #8b96b8; font-weight: 700; margin-top: 4px; }
+  .pick-tag.first { color: var(--gold); }
+  .pick-tag.last { color: #ff8a9b; }
+
+  .controls { margin-top: 36px; display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+
+  /* ── Board (final list) ── */
+  #board { width: 100%; max-width: 720px; max-height: 88vh; overflow-y: auto; }
+  .board-title { text-align: center; font-size: clamp(24px, 6vw, 40px); font-weight: 900; margin-bottom: 6px;
+    background: linear-gradient(90deg, #fff, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .board-sub { text-align: center; color: #aeb8d6; margin-bottom: 22px; font-size: 14px; }
+  .board-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .board-row { display: flex; align-items: center; gap: 14px; background: #131a2e; border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 12px 18px; animation: slideIn .4s ease backwards; }
+  .board-row.first { border-color: rgba(255,209,102,0.5); background: linear-gradient(90deg, rgba(255,209,102,0.08), #131a2e); }
+  .board-row.last { border-color: rgba(255,138,155,0.4); }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+  .board-num { font-size: 22px; font-weight: 900; color: var(--gold); width: 34px; flex-shrink: 0; }
+  .board-name { font-size: 19px; font-weight: 700; text-transform: capitalize; }
+  .board-row.first .board-num { font-size: 26px; }
+  @media (max-width: 560px) { .board-grid { grid-template-columns: 1fr; } }
+
+  canvas.confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+</style>
+</head>
+<body>
+  <div class="stripes"></div>
+  <div class="glow"></div>
+
+  <!-- Intro -->
+  <section id="intro" class="screen">
+    <div class="kicker">⚽ World Cup Pool 2026 · United States</div>
+    <h1 class="big-title">THE DRAFT<br>ORDER</h1>
+    <p class="sub">16 managers. 48 nations. One shot at glory.<br>The order has been randomized. Let's reveal it — one pick at a time.</p>
+    <button class="btn" id="startBtn">🎲 Start the Reveal</button>
+  </section>
+
+  <!-- Reveal -->
+  <section id="reveal" class="screen hidden">
+    <div class="counter">Pick <b id="cNow">0</b> of 16</div>
+    <div id="stage">
+      <div class="pickbox"><div id="card"></div></div>
+    </div>
+    <div class="controls">
+      <button class="btn" id="nextBtn">Reveal Pick #1 →</button>
+    </div>
+  </section>
+
+  <!-- Final board -->
+  <section id="boardScreen" class="screen hidden">
+    <div id="board">
+      <div class="board-title">🏆 Official Draft Order</div>
+      <div class="board-sub">World Cup Pool 2026 · drafting begins with pick #1</div>
+      <div class="board-grid" id="boardGrid"></div>
+      <div style="text-align:center; margin-top:24px;">
+        <button class="btn" id="replayBtn" style="font-size:15px; padding:14px 30px;">↻ Replay Reveal</button>
+      </div>
+    </div>
+  </section>
+
+<script>
+  // Draft order — randomized via crypto Fisher-Yates, locked in.
+  const ORDER = ["chazz","zach","trevor","corbin","parker","ryan","petey","brett","kranz","grant","heacock","matt","adam","andrew","ari","bako"];
+
+  const $ = (s) => document.querySelector(s);
+  const intro = $("#intro"), reveal = $("#reveal"), boardScreen = $("#boardScreen");
+  const card = $("#card"), cNow = $("#cNow"), nextBtn = $("#nextBtn");
+  let idx = 0;
+
+  const TAGS = { first: "🥇 First Overall Pick", last: "🪣 Last Pick · Wooden Spoon of the Draft" };
+
+  function show(el) { [intro, reveal, boardScreen].forEach(s => s.classList.add("hidden")); el.classList.remove("hidden"); }
+
+  function buildDrumroll() {
+    // brief shuffle of random names before the real one lands
+    const pool = ORDER.filter((_, i) => i !== idx);
+    let ticks = 0;
+    const total = 14;
+    const spin = () => {
+      const n = pool[Math.floor(Math.random() * pool.length)];
+      card.className = "";
+      card.innerHTML = `
+        <div class="pick-num">${idx + 1}</div>
+        <div class="pick-divider"></div>
+        <div><div class="pick-name" style="opacity:.55">${n}</div></div>`;
+      ticks++;
+      if (ticks < total) setTimeout(spin, 60 + ticks * 11);
+      else landPick();
+    };
+    spin();
+  }
+
+  function landPick() {
+    const name = ORDER[idx];
+    const tagClass = idx === 0 ? "first" : idx === 15 ? "last" : "";
+    const tag = idx === 0 ? TAGS.first : idx === 15 ? TAGS.last : `Pick ${idx + 1} of 16`;
+    card.className = "card pop";
+    card.innerHTML = `
+      <div class="pick-num">${idx + 1}</div>
+      <div class="pick-divider"></div>
+      <div>
+        <div class="pick-name">${name}</div>
+        <span class="pick-tag ${tagClass}">${tag}</span>
+      </div>`;
+    cNow.textContent = idx + 1;
+    if (idx === 0) burst(70);
+    if (idx === ORDER.length - 1) {
+      nextBtn.textContent = "See the Full Board →";
+      nextBtn.onclick = showBoard;
+    } else {
+      nextBtn.textContent = `Reveal Pick #${idx + 2} →`;
+    }
+    nextBtn.disabled = false;
+  }
+
+  function nextPick() {
+    if (idx >= ORDER.length) return showBoard();
+    nextBtn.disabled = true;
+    buildDrumroll();
+    idx++;
+  }
+
+  function showBoard() {
+    show(boardScreen);
+    const grid = $("#boardGrid");
+    grid.innerHTML = ORDER.map((n, i) => `
+      <div class="board-row ${i === 0 ? "first" : i === ORDER.length - 1 ? "last" : ""}" style="animation-delay:${i * 55}ms">
+        <span class="board-num">${i + 1}</span>
+        <span class="board-name">${n}</span>
+        ${i === 0 ? '<span style="margin-left:auto">🥇</span>' : i === ORDER.length - 1 ? '<span style="margin-left:auto">🪣</span>' : ""}
+      </div>`).join("");
+    burst(160);
+  }
+
+  $("#startBtn").onclick = () => { show(reveal); };
+  nextBtn.onclick = nextPick;
+  $("#replayBtn").onclick = () => { idx = 0; cNow.textContent = "0"; card.className = ""; card.innerHTML = ""; nextBtn.textContent = "Reveal Pick #1 →"; nextBtn.onclick = nextPick; show(reveal); };
+
+  // ── confetti ──
+  function burst(count) {
+    const cv = document.createElement("canvas");
+    cv.className = "confetti"; document.body.appendChild(cv);
+    const ctx = cv.getContext("2d"); cv.width = innerWidth; cv.height = innerHeight;
+    const colors = ["#FFD700","#B31942","#0A3161","#ffffff","#4DCCFF","#FF9F1C"];
+    const parts = Array.from({ length: count }, () => ({
+      x: innerWidth / 2 + (Math.random() - 0.5) * 200, y: innerHeight * 0.4,
+      r: 4 + Math.random() * 7, c: colors[(Math.random() * colors.length) | 0],
+      vx: (Math.random() - 0.5) * 12, vy: -6 - Math.random() * 9, rot: Math.random() * 6, vr: -.2 + Math.random() * .4,
+    }));
+    const t0 = performance.now();
+    (function tick(t) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      for (const p of parts) {
+        p.vy += 0.28; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.fillStyle = p.c; ctx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); ctx.restore();
+      }
+      if (t - t0 < 2600) requestAnimationFrame(tick); else cv.remove();
+    })(t0);
+  }
+
+  // keyboard: space/enter advances
+  addEventListener("keydown", (e) => {
+    if ((e.code === "Space" || e.code === "Enter")) {
+      if (!intro.classList.contains("hidden")) $("#startBtn").click();
+      else if (!reveal.classList.contains("hidden") && !nextBtn.disabled) nextBtn.click();
+      e.preventDefault();
+    }
+  });
+</script>
+</body>
+</html>
