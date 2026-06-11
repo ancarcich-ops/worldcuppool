@@ -1,0 +1,8 @@
+{
+  "_help": {
+    "matches": "Manual results that replace/add to the live feed. Each entry: { \"stage\": \"GROUP|R32|R16|QF|SF|THIRD|FINAL\", \"home\": \"BRA\", \"away\": \"MAR\", \"homeScore\": 2, \"awayScore\": 1, \"status\": \"FINISHED\", \"winner\": \"BRA\" }. 'winner' is only needed for knockout games decided on penalties. Matched against the feed by stage+teams.",
+    "groupOrder": "Force final group standings if the auto-computed tiebreak ever differs from FIFA's official one, e.g. { \"A\": [\"MEX\", \"KOR\", \"RSA\", \"CZE\"] }"
+  },
+  "matches": [],
+  "groupOrder": {}
+}

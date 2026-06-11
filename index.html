@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Cup Pool 2026 ⚽🏆</title>
+  <meta name="description" content="FIFA World Cup 2026 pool — live leaderboard, group standings, bracket, and the Wooden Spoon race.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+  <link rel="preconnect" href="https://flagcdn.com">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-kicker">FIFA World Cup 26 · United 2026 🇺🇸🇨🇦🇲🇽</div>
+      <h1 id="pool-name" class="hero-title">World Cup Pool 2026</h1>
+      <div id="hero-stats" class="hero-stats"></div>
+      <div id="updated-at" class="updated-at"></div>
+    </div>
+    <div class="hero-ball">⚽</div>
+  </header>
+
+  <div id="banners"></div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="leaderboard">🏆 Leaderboard</button>
+    <button class="tab" data-view="groups">📊 Groups</button>
+    <button class="tab" data-view="matches">⚽ Matches</button>
+    <button class="tab" data-view="bracket">🗺️ Bracket</button>
+    <button class="tab" data-view="spoon">🥄 Wooden Spoon</button>
+    <button class="tab" data-view="rules">📜 Scoring</button>
+  </nav>
+
+  <main>
+    <section id="view-leaderboard" class="view active"></section>
+    <section id="view-groups" class="view grid-view"></section>
+    <section id="view-matches" class="view"></section>
+    <section id="view-bracket" class="view"></section>
+    <section id="view-spoon" class="view"></section>
+    <section id="view-rules" class="view">
+      <div class="rules-card">
+        <h2>📜 How scoring works</h2>
+        <p>Every player drafted teams before kickoff. Points stack as your countries win games and climb the
+           bracket — group winners out-earn runners-up, and deep runs pay big. One consolation prize: the
+           <b>Wooden Spoon 🥄</b> goes to whoever owns the tournament's worst team.</p>
+        <div id="rules-table" class="rules-table"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Made with ⚽ for the pool · scores sync automatically from the live feed
+  </footer>
+
+  <script src="data/teams.js"></script>
+  <script src="data/pool.js"></script>
+  <script src="data/scoring.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
