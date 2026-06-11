@@ -1,5 +1,7 @@
 # ⚽ World Cup Pool 2026
 
+**Live dashboard:** https://ancarcich-ops.github.io/worldcuppool/
+
 A live dashboard for a FIFA World Cup 2026 draft pool. Every player owns a few countries;
 points stack as their teams win matches and climb the bracket — plus a **Wooden Spoon 🥄**
 consolation bonus for whoever owns the tournament's worst team.
