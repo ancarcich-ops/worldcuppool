@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-13T21:55:31.501Z",
+  "updatedAt": "2026-06-13T22:52:28.681Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -67,11 +67,11 @@
       "stage": "GROUP",
       "group": "C",
       "utcDate": "2026-06-13T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "BRA",
       "away": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
