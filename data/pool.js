@@ -24,7 +24,7 @@ const POOL = {
     { name: "Petey", avatar: "🦅", teams: ["POR", "AUT", "TUN"] },
     { name: "Brett", avatar: "🦠", teams: ["NED", "SWE", "RSA"] },
     { name: "Kranz", avatar: "🎎", teams: ["BEL", "TUR", "IRQ"] },
-    { name: "Grant", avatar: "🍣", teams: ["USA", "ECU", "QAT"] },
+    { name: "Grant", avatar: "🐟", teams: ["USA", "ECU", "QAT"] },
     { name: "Heacock", avatar: "🍆", teams: ["NOR", "CIV", "UZB"] },
     { name: "Matt", avatar: "🐍", teams: ["COL", "URU", "JOR"] },
     { name: "Adam", avatar: "🐀", teams: ["KOR", "CAN", "COD"] },
