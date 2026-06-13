@@ -1,38 +1,36 @@
 // ════════════════════════════════════════════════════════════════════
-//  YOUR POOL — edit this file after the draft!
+//  YOUR POOL — the real draft (drafted June 12, 2026)
 //
 //  Each player gets a name, an emoji avatar, and a list of team codes
 //  (see data/teams.js for all 48 codes).
-//  Every team must be owned by exactly one player.
+//  Every team is owned by exactly one player.
 //
-//  settings.sampleDraft: true  → shows a "SAMPLE DRAFT" banner so nobody
-//  thinks these picks are real. Flip it to false once you enter the
-//  real draft results below.
+//  settings.sampleDraft: false → these are the real picks.
 // ════════════════════════════════════════════════════════════════════
 
 const POOL = {
   settings: {
     poolName: "World Cup Pool 2026",
-    sampleDraft: true, // ← set to false after you enter the real picks
+    sampleDraft: false,
   },
 
   players: [
-    { name: "Player 1",  avatar: "🦅", teams: ["ARG", "EGY", "PAN"] },
-    { name: "Player 2",  avatar: "🐯", teams: ["FRA", "TUN", "CUW"] },
-    { name: "Player 3",  avatar: "🦈", teams: ["ESP", "KOR", "JOR"] },
-    { name: "Player 4",  avatar: "🐺", teams: ["ENG", "AUS", "HAI"] },
-    { name: "Player 5",  avatar: "🦁", teams: ["BRA", "SUI", "NZL"] },
-    { name: "Player 6",  avatar: "🐻", teams: ["POR", "MEX", "IRQ"] },
-    { name: "Player 7",  avatar: "🦊", teams: ["GER", "CAN", "RSA"] },
-    { name: "Player 8",  avatar: "🐙", teams: ["NED", "USA", "QAT"] },
-    { name: "Player 9",  avatar: "🦂", teams: ["CRO", "SEN", "KSA"] },
-    { name: "Player 10", avatar: "🐉", teams: ["BEL", "JPN", "GHA"] },
-    { name: "Player 11", avatar: "🦬", teams: ["URU", "MAR", "UZB"] },
-    { name: "Player 12", avatar: "🐎", teams: ["COL", "NOR", "CPV"] },
-    { name: "Player 13", avatar: "🦉", teams: ["AUT", "ECU", "SCO"] },
-    { name: "Player 14", avatar: "🐍", teams: ["TUR", "CIV", "BIH"] },
-    { name: "Player 15", avatar: "🦜", teams: ["IRN", "PAR", "COD"] },
-    { name: "Player 16", avatar: "🐊", teams: ["SWE", "ALG", "CZE"] },
+    { name: "Chazz", avatar: "🏍️", teams: ["ESP", "BIH", "PAR"] },
+    { name: "Zach", avatar: "👷🏻‍♂️", teams: ["FRA", "ALG", "SCO"] },
+    { name: "Trevor", avatar: "🍝", teams: ["ARG", "AUS", "NZL"] },
+    { name: "Corbin", avatar: "🥜", teams: ["ENG", "CZE", "GHA"] },
+    { name: "Parker", avatar: "🦑", teams: ["BRA", "EGY", "PAN"] },
+    { name: "Ryan", avatar: "🙏", teams: ["GER", "SEN", "KSA"] },
+    { name: "Petey", avatar: "🦅", teams: ["POR", "AUT", "TUN"] },
+    { name: "Brett", avatar: "🦠", teams: ["NED", "SWE", "RSA"] },
+    { name: "Kranz", avatar: "🥟", teams: ["BEL", "TUR", "IRQ"] },
+    { name: "Grant", avatar: "🍣", teams: ["USA", "ECU", "QAT"] },
+    { name: "Heacock", avatar: "🍆", teams: ["NOR", "CIV", "UZB"] },
+    { name: "Matt", avatar: "🐍", teams: ["COL", "URU", "JOR"] },
+    { name: "Adam", avatar: "🐀", teams: ["KOR", "CAN", "COD"] },
+    { name: "Andrew", avatar: "🐧", teams: ["SUI", "CRO", "CPV"] },
+    { name: "Ari", avatar: "👳🏽‍♂️", teams: ["MEX", "IRN", "HAI"] },
+    { name: "Bako", avatar: "👽", teams: ["MAR", "JPN", "CUW"] },
   ],
 };
 
