@@ -97,7 +97,8 @@
       var pool = new URLSearchParams(location.search).get("pool");
       var photos = (pool === "2")
         ? ["assets/splash/g2-1.jpeg", "assets/splash/g2-2.jpeg", "assets/splash/g2-3.jpeg",
-           "assets/splash/g2-4.jpeg", "assets/splash/g2-5.jpeg", "assets/splash/g2-6.jpeg"]
+           "assets/splash/g2-4.jpeg", "assets/splash/g2-5.jpeg", "assets/splash/g2-6.jpeg",
+           "assets/splash/g2-7.jpeg"]
         : ["assets/splash/photo1.png", "assets/splash/photo2.png"];
       document.getElementById("splash-img").src = photos[Math.floor(Math.random() * photos.length)];
       document.documentElement.classList.add("splash-open");
