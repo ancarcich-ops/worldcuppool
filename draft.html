@@ -101,7 +101,7 @@
 </head>
 <body>
   <header class="clock">
-    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <a href="index.html" class="back-link" id="backLink">← Back to Dashboard</a>
     <div class="clock-kicker" id="pickLabel">Draft Tracker</div>
     <div class="clock-name" id="onClock">—</div>
     <div class="clock-sub" id="nextUp"></div>
@@ -162,14 +162,29 @@
 
 <script src="data/teams.js"></script>
 <script>
-  // Official draft order (crypto-random draw, June 11 2026)
-  // To duplicate for another group, just replace these names — rounds and
-  // picks-per-manager auto-adjust (48 ÷ players → e.g. 16→3, 12→4, 8→6).
-  const ORDER = ["chazz","zach","trevor","corbin","parker","ryan","petey","brett","kranz","grant","heacock","matt","adam","andrew","ari","bako"];
+  // Draft orders per pool. ?pool=2 runs the Group 2 draft (separate board,
+  // separate broadcast file, separate saved state). Rounds and picks-per-
+  // manager auto-adjust to the roster size (48 ÷ players → 16→3, 12→4).
+  const POOLS = {
+    default: {
+      name: "Group 1",
+      order: ["chazz","zach","trevor","corbin","parker","ryan","petey","brett","kranz","grant","heacock","matt","adam","andrew","ari","bako"],
+    },
+    "2": {
+      name: "Group 2",
+      // PLACEHOLDER 12 names — replace with the real draft order.
+      order: ["Player 1","Player 2","Player 3","Player 4","Player 5","Player 6","Player 7","Player 8","Player 9","Player 10","Player 11","Player 12"],
+    },
+  };
+  const POOL_ID = new URLSearchParams(location.search).get("pool") || "default";
+  const CFG = POOLS[POOL_ID] || POOLS.default;
+  const ORDER = CFG.order;
   const ROUNDS = Math.floor(Object.keys(TEAMS).length / ORDER.length); // teams ÷ managers
   const TOTAL = ORDER.length * ROUNDS;
   const AVATARS = ["🦅","🐯","🦈","🐺","🦁","🐻","🦊","🐙","🦂","🐉","🦬","🐎","🦉","🐍","🦜","🐊"];
-  const KEY = "wc26-draft-tracker";
+  const DRAFT_FILE = POOL_ID === "default" ? "data/draft.json" : `data/draft.${POOL_ID}.json`;
+  const KEY = "wc26-draft-tracker-" + POOL_ID;
+  if (POOL_ID !== "default") document.getElementById("backLink").href = "index.html?pool=" + POOL_ID;
 
   let state = load() || { mode: "snake", picks: [] }; // picks: [{ team, manager }]
 
@@ -190,8 +205,8 @@
   const REPO_CFG = detectRepo();
   let REPO = REPO_CFG.owner;
   let BRANCH = REPO_CFG.branch;
-  const FILE_URL = `https://api.github.com/repos/${REPO}/contents/data/draft.json`;
-  const TOKEN_KEY = "wc26-draft-token";
+  const FILE_URL = `https://api.github.com/repos/${REPO}/contents/${DRAFT_FILE}`;
+  const TOKEN_KEY = "wc26-draft-token-" + POOL_ID;
   let token = localStorage.getItem(TOKEN_KEY) || "";
   let remoteSha = null;
 
@@ -312,7 +327,8 @@
   function render(justPicked) {
     const n = state.picks.length;
     const done = n >= TOTAL;
-    $("#pickLabel").textContent = done ? "🏁 Draft complete!" : `On the clock — Pick ${n + 1} of ${TOTAL} · Round ${Math.floor(n / ORDER.length) + 1}`;
+    const groupTag = POOL_ID === "default" ? "" : `${CFG.name} · `;
+    $("#pickLabel").textContent = done ? `🏁 ${CFG.name} draft complete!` : `${groupTag}On the clock — Pick ${n + 1} of ${TOTAL} · Round ${Math.floor(n / ORDER.length) + 1}`;
     $("#onClock").textContent = done ? "Draft Complete 🎉" : managerAt(n);
     $("#onClock").classList.toggle("done", done);
     $("#nextUp").innerHTML = done
@@ -422,10 +438,12 @@
       const teams = ps.map((c) => `"${c}"`).join(", ");
       return `    { name: "${cap(m)}", avatar: "${AVATARS[i % AVATARS.length]}", teams: [${teams}] },`;
     });
-    $("#modalTitle").textContent = state.picks.length >= TOTAL ? "🏁 Draft complete — export" : `📤 Export (${state.picks.length}/${TOTAL} picks so far)`;
+    const poolName = POOL_ID === "default" ? "World Cup Pool 2026" : `World Cup Pool 2026 — ${CFG.name}`;
+    const target = POOL_ID === "default" ? "data/pool.js" : `data/pool.${POOL_ID}.js`;
+    $("#modalTitle").textContent = state.picks.length >= TOTAL ? `🏁 Draft complete — paste into ${target}` : `📤 Export (${state.picks.length}/${TOTAL}) → ${target}`;
     $("#exportText").value = `const POOL = {
   settings: {
-    poolName: "World Cup Pool 2026",
+    poolName: "${poolName}",
     sampleDraft: false,
   },
 

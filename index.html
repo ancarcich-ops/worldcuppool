@@ -69,7 +69,14 @@
   </footer>
 
   <script src="data/teams.js"></script>
-  <script src="data/pool.js"></script>
+  <script>
+    // Load the roster for the selected pool: ?pool=2 → data/pool.2.js (default → data/pool.js).
+    (function () {
+      var p = new URLSearchParams(location.search).get("pool");
+      var file = (p && /^[a-z0-9_-]+$/i.test(p)) ? "data/pool." + p + ".js" : "data/pool.js";
+      document.write('<script src="' + file + '"><\/script>');
+    })();
+  </script>
   <script src="data/scoring.js"></script>
   <script src="js/engine.js"></script>
   <script src="js/app.js"></script>
