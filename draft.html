@@ -163,8 +163,10 @@
 <script src="data/teams.js"></script>
 <script>
   // Official draft order (crypto-random draw, June 11 2026)
+  // To duplicate for another group, just replace these names — rounds and
+  // picks-per-manager auto-adjust (48 ÷ players → e.g. 16→3, 12→4, 8→6).
   const ORDER = ["chazz","zach","trevor","corbin","parker","ryan","petey","brett","kranz","grant","heacock","matt","adam","andrew","ari","bako"];
-  const ROUNDS = 3; // 16 managers × 3 picks = 48 nations
+  const ROUNDS = Math.floor(Object.keys(TEAMS).length / ORDER.length); // teams ÷ managers
   const TOTAL = ORDER.length * ROUNDS;
   const AVATARS = ["🦅","🐯","🦈","🐺","🦁","🐻","🦊","🐙","🦂","🐉","🦬","🐎","🦉","🐍","🦜","🐊"];
   const KEY = "wc26-draft-tracker";

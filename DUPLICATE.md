@@ -27,9 +27,11 @@ broadcast, and its own scores — fully independent of this one.
    it's done, hit **📤 Export picks** and copy the block.
 4. **Drop in the picks.** Paste that block over `data/pool.js`, commit.
    The dashboard switches to the real rosters automatically.
-5. **(Optional) New draft order.** If you want a fresh random order,
-   ask me to generate one, or edit the `ORDER` array near the top of the
-   `<script>` in `draft.html`.
+5. **Set the new roster's order.** Replace the `ORDER` array near the top
+   of the `<script>` in `draft.html` with the new group's names. **Picks
+   per manager auto-adjust** to the player count (48 ÷ players): 16
+   players → 3 teams each, **12 players → 4 teams each**, 8 → 6, 24 → 2.
+   Ask me to generate a fresh random order if you want one.
 
 That's it. The scores Action runs on its own every ~20 min (GitHub may
 throttle to hourly); trigger it manually anytime via **Actions → Update
