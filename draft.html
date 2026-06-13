@@ -22,6 +22,10 @@
       radial-gradient(ellipse 90% 160% at 50% 60%, rgba(5,12,30,0.96) 35%, rgba(5,12,30,0.8) 70%, rgba(5,12,30,0.55) 100%),
       repeating-linear-gradient(180deg, #B31942 0 22px, #e9ebf5 22px 44px);
   }
+  .back-link { position: absolute; left: 16px; top: 14px; color: #fff; text-decoration: none; font-size: 13px; font-weight: 700;
+    background: rgba(5,12,30,0.55); padding: 7px 14px; border-radius: 999px; text-shadow: 0 1px 6px rgba(5,12,30,0.9); }
+  .back-link:hover { background: rgba(5,12,30,0.8); }
+  @media (max-width: 560px) { .back-link { position: static; display: inline-block; margin-bottom: 8px; } }
   .clock-kicker { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 800; }
   .clock-name { font-size: clamp(30px, 7vw, 52px); font-weight: 900; letter-spacing: -1px; text-transform: capitalize; line-height: 1.15;
     text-shadow: 0 2px 14px rgba(5,12,30,0.95); }
@@ -97,6 +101,7 @@
 </head>
 <body>
   <header class="clock">
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
     <div class="clock-kicker" id="pickLabel">Draft Tracker</div>
     <div class="clock-name" id="onClock">—</div>
     <div class="clock-sub" id="nextUp"></div>
