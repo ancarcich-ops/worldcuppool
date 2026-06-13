@@ -83,16 +83,6 @@ body {
 .stat-live b { color: #ff8a9b; animation: pulse 1.4s ease infinite; }
 .updated-at { font-size: 12px; color: #c2cbe6; text-shadow: 0 1px 6px rgba(5, 12, 30, 0.9); }
 
-.draft-link {
-  display: inline-block; margin-top: 14px; text-decoration: none;
-  font-size: 13px; font-weight: 800; letter-spacing: 0.5px; color: #06122e;
-  padding: 9px 20px; border-radius: 999px;
-  background: linear-gradient(135deg, var(--gold), #ffae42);
-  box-shadow: 0 6px 22px rgba(255, 209, 102, 0.4);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.draft-link:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 209, 102, 0.55); }
-
 .hero-inner { position: relative; z-index: 1; }
 
 .hero-ball {
