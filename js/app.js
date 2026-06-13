@@ -350,12 +350,14 @@
   function renderHero() {
     $("#pool-name").textContent = POOL.settings.poolName;
     const finished = state.matches.filter((m) => m.status === "FINISHED").length;
-    const total = state.matches.length || 104;
+    const TOURNAMENT_MATCHES = 104; // total matches in the 48-team World Cup
+    const matchesLeft = Math.max(0, TOURNAMENT_MATCHES - finished);
     const liveCount = state.matches.filter((m) => ["LIVE", "IN_PLAY", "PAUSED"].includes(m.status)).length;
     $("#hero-stats").innerHTML = `
       <div class="stat"><b>${finished}</b><span>matches played</span></div>
       <div class="stat"><b>${state.players.length}</b><span>players</span></div>
       <div class="stat"><b>${Object.values(state.scores).filter((s) => s.status !== "out").length}</b><span>teams alive</span></div>
+      <div class="stat"><b>${matchesLeft}</b><span>matches left</span></div>
       ${liveCount ? `<div class="stat stat-live"><b>${liveCount}</b><span>LIVE now</span></div>` : ""}`;
     $("#updated-at").textContent = live.updatedAt
       ? `Live feed updated ${new Date(live.updatedAt).toLocaleString()}`
