@@ -273,6 +273,9 @@
   // ── matches ─────────────────────────────────────────────────────
   function matchCard(m) {
     const ownerH = state.owners[m.home], ownerA = state.owners[m.away];
+    const avatarMap = Object.fromEntries((POOL.players || []).map(p => [p.name, p.avatar]));
+    const avatarH = ownerH ? (avatarMap[ownerH] || ownerH) : null;
+    const avatarA = ownerA ? (avatarMap[ownerA] || ownerA) : null;
     const liveNow = m.status === "LIVE" || m.status === "IN_PLAY" || m.status === "PAUSED";
     const done = m.status === "FINISHED";
     const score = done || liveNow ? `${m.homeScore ?? "–"} : ${m.awayScore ?? "–"}` : fmtDate(m.utcDate).split(",").pop().trim();
@@ -282,9 +285,9 @@
       <div class="match-stage">${PoolEngine.STAGE_LABELS[m.stage] || m.stage}${m.group ? ` · Group ${m.group}` : ""}
         ${liveNow ? `<span class="live-pip">● LIVE</span>` : `<span class="match-date">${fmtDate(m.utcDate)}</span>`}</div>
       <div class="match-teams">
-        <div class="mt home ${done && m.winner === m.home ? "won" : ""}">${flag(m.home, "w40")}<span>${esc(teamName(m.home))}</span>${ownerH ? `<span class="owner-tag">${esc(ownerH)}</span>` : ""}</div>
+        <div class="mt home ${done && m.winner === m.home ? "won" : ""}">${flag(m.home, "w40")}<span>${esc(teamName(m.home))}</span>${avatarH ? `<span class="owner-tag">${avatarH}</span>` : ""}</div>
         <div class="score">${score}</div>
-        <div class="mt away ${done && m.winner === m.away ? "won" : ""}">${ownerA ? `<span class="owner-tag">${esc(ownerA)}</span>` : ""}<span>${esc(teamName(m.away))}</span>${flag(m.away, "w40")}</div>
+        <div class="mt away ${done && m.winner === m.away ? "won" : ""}">${avatarA ? `<span class="owner-tag">${avatarA}</span>` : ""}<span>${esc(teamName(m.away))}</span>${flag(m.away, "w40")}</div>
       </div>
       ${pens}
     </div>`;
