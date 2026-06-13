@@ -140,8 +140,12 @@
         seen.set(code, p.name);
       }
     }
-    const unowned = Object.keys(TEAMS).filter((c) => !seen.has(c));
-    if (unowned.length && unowned.length < 48) problems.push(`Unowned teams: ${unowned.map(teamName).join(", ")}`);
+    // Only flag unowned teams as a problem when the pool expects everyone covered.
+    // Pools with fewer players than fit 48 teams (e.g. 10×4) leave leftovers on purpose.
+    if (!POOL.settings.allowUnowned) {
+      const unowned = Object.keys(TEAMS).filter((c) => !seen.has(c));
+      if (unowned.length && unowned.length < 48) problems.push(`Unowned teams: ${unowned.map(teamName).join(", ")}`);
+    }
     return problems;
   }
 
@@ -245,11 +249,12 @@
           <tbody>
           ${rows.map((r, i) => {
             const owner = state.owners[r.code];
-            const qualClass = started && i < 2 ? "q-auto" : started && i === 2 ? "q-maybe" : "";
-            return `<tr class="${qualClass}">
+            const leftover = !owner && POOL.settings.allowUnowned;
+            const qualClass = `${started && i < 2 ? "q-auto" : started && i === 2 ? "q-maybe" : ""}${leftover ? " leftover" : ""}`;
+            return `<tr class="${qualClass.trim()}">
               <td class="pos">${i + 1}</td>
               <td class="tl team-cell">${flag(r.code, "w40")} <span>${esc(teamName(r.code))}</span>
-                ${owner ? `<span class="owner-tag">${esc(owner)}</span>` : ""}</td>
+                ${owner ? `<span class="owner-tag">${esc(owner)}</span>` : leftover ? `<span class="owner-tag out-tag">out of play</span>` : ""}</td>
               <td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td>
               <td class="${r.GD > 0 ? "pos-gd" : r.GD < 0 ? "neg-gd" : ""}">${r.GD > 0 ? "+" : ""}${r.GD}</td>
               <td class="pts-cell">${r.Pts}</td></tr>`;
@@ -374,6 +379,9 @@
 
     const banners = [];
     if (POOL.settings.sampleDraft) banners.push(`🎲 <b>SAMPLE DRAFT</b> — these team assignments are placeholders until the real draft is entered.`);
+    if (POOL.settings.allowUnowned && state.unowned?.length) {
+      banners.push(`🚫 <b>Out of play:</b> ${state.unowned.map(teamName).map(esc).join(", ")} — undrafted, can't score.`);
+    }
     validatePool().forEach((p) => banners.push(`⚠️ ${esc(p)}`));
     $("#banners").innerHTML = banners.map((b) => `<div class="banner">${b}</div>`).join("");
 

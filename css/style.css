@@ -225,6 +225,9 @@ tr.q-maybe .pos { color: var(--gold); }
   font-size: 10px; background: rgba(77, 204, 255, 0.12); color: var(--blue);
   padding: 2px 7px; border-radius: 999px; font-weight: 700; white-space: nowrap;
 }
+.owner-tag.out-tag { background: rgba(255, 255, 255, 0.07); color: var(--muted); }
+tr.leftover { opacity: 0.45; }
+tr.leftover .team-cell span { text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.35); }
 
 /* ── Matches ──────────────────────────────────────── */
 .match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 12px; }

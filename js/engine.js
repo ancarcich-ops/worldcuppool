@@ -97,9 +97,11 @@ const PoolEngine = (() => {
     return new Set(thirds.slice(0, 8).map((r) => r.code));
   }
 
-  // ── Wooden Spoon: worst group-stage record in the tournament ────
-  function woodenSpoonRanking(tables, groups) {
-    const all = groups.flatMap((g) => tables[g]);
+  // ── Wooden Spoon: worst group-stage record among OWNED teams ────
+  // (leftover/unowned teams can't win anyone a bonus, so they're excluded)
+  function woodenSpoonRanking(tables, groups, ownedSet) {
+    let all = groups.flatMap((g) => tables[g]);
+    if (ownedSet && ownedSet.size) all = all.filter((r) => ownedSet.has(r.code));
     return [...all].sort(
       (x, y) => x.Pts - y.Pts || x.GD - y.GD || x.GF - y.GF || x.code.localeCompare(y.code)
     );
@@ -183,12 +185,13 @@ const PoolEngine = (() => {
   // ── Main entry point ────────────────────────────────────────────
   function compute({ teams, groups, matches, scoring, pool, overrides }) {
     const merged = applyOverrides(matches, overrides);
+    const ownedSet = new Set(pool.players.flatMap((p) => p.teams));
     const tables = groupTables(teams, groups, merged);
     applyGroupOrder(tables, overrides);
     const allGroupsDone = groups.every((g) => groupComplete(tables, g));
     const thirds = thirdPlaceQualifiers(tables, groups);
-    const spoonRank = woodenSpoonRanking(tables, groups);
-    const spoonCode = allGroupsDone ? spoonRank[0].code : null;
+    const spoonRank = woodenSpoonRanking(tables, groups, ownedSet);
+    const spoonCode = allGroupsDone && spoonRank.length ? spoonRank[0].code : null;
     const scores = teamScores(teams, groups, merged, scoring, tables, thirds, allGroupsDone, spoonCode);
 
     const owners = {}; // team code → player name
@@ -210,7 +213,8 @@ const PoolEngine = (() => {
       p.rank = rank;
     });
 
-    return { matches: merged, tables, allGroupsDone, thirds, spoonRank, spoonCode, scores, players, owners };
+    const unowned = Object.keys(teams).filter((c) => !ownedSet.has(c));
+    return { matches: merged, tables, allGroupsDone, thirds, spoonRank, spoonCode, scores, players, owners, unowned };
   }
 
   return { compute, STAGE_ORDER, STAGE_LABELS };
