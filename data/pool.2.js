@@ -18,7 +18,7 @@ const POOL = {
     { name: "Esther", avatar: "🐯", teams: ["ENG", "KOR", "NOR", "CUW"] },
     { name: "Tim", avatar: "🦈", teams: ["FRA", "ECU", "TUR", "UZB"] },
     { name: "Mari", avatar: "🐺", teams: ["ARG", "MAR", "NZL", "CZE"] },
-    { name: "Payton", avatar: "🦁", teams: ["BRA", "CRO", "SCO", "PAN"] },
+    { name: "Payton", avatar: "🧜‍♀️", teams: ["BRA", "CRO", "SCO", "PAN"] },
     { name: "Dusan", avatar: "🐻", teams: ["POR", "CAN", "IRN", "CPV"] },
     { name: "Andrew", avatar: "🐧", teams: ["NED", "SUI", "SEN", "ALG"] },
     { name: "Pavle", avatar: "🐙", teams: ["GER", "USA", "SWE", "EGY"] },
