@@ -222,7 +222,32 @@
     return BRANCH;
   }
   let following = false; // true = read-only viewer
+  let viewerInterval = null;
   let publishTimer = null;
+
+  // Viewers read the broadcast straight from the GitHub Pages site (no API
+  // rate limit, so a whole room can watch). The commissioner still publishes
+  // via the API. DRAFT_FILE is relative, e.g. "data/draft.2.json".
+  async function viewerGet() {
+    const res = await fetch(`${DRAFT_FILE}?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) return null; // 404 = not broadcasting yet (or Pages still building)
+    return res.json();
+  }
+
+  async function viewerTick() {
+    if (token) return; // commissioner doesn't follow
+    try {
+      const data = await viewerGet();
+      if (!data || !Array.isArray(data.picks)) return; // no broadcast yet — stay in local mode
+      const wasFollowing = following;
+      following = true;
+      if (!wasFollowing || JSON.stringify(data) !== JSON.stringify({ mode: state.mode, picks: state.picks })) {
+        state = { mode: data.mode || "snake", picks: data.picks };
+        render();
+      }
+      syncNote(`👀 Watching live · ${state.picks.length}/${TOTAL} picks · updated ${new Date().toLocaleTimeString()}`);
+    } catch { /* transient — keep last good state */ }
+  }
 
   async function remoteGet() {
     await ensureBranch();
@@ -269,18 +294,6 @@
     publishTimer = setTimeout(() => remotePut().catch((e) => syncNote(`⚠️ ${e.message}`)), 700);
   }
 
-  async function pollRemote() {
-    try {
-      const remote = await remoteGet();
-      if (remote && JSON.stringify(remote.json.picks) !== JSON.stringify(state.picks)) {
-        state = remote.json;
-        remoteSha = remote.sha;
-        render();
-      }
-      if (remote) syncNote(`👀 Watching live · ${state.picks.length}/${TOTAL} picks · updated ${new Date().toLocaleTimeString()}`);
-    } catch { /* transient — keep last good state */ }
-  }
-
   function syncNote(msg) {
     const el = document.querySelector("#syncNote");
     if (el) el.textContent = msg;
@@ -296,14 +309,11 @@
       }
       schedulePublish();
     } else {
-      // no token: if a broadcast exists, follow it read-only
-      const remote = await remoteGet().catch(() => null);
-      if (remote && (remote.json.picks?.length || 0) >= state.picks.length) {
-        following = true;
-        state = remote.json;
-        setInterval(pollRemote, 75_000);
-        syncNote(`👀 Watching live · refreshes automatically`);
-      }
+      // no token: poll the broadcast continuously. Auto-joins the moment the
+      // commissioner goes live, even if this page was opened beforehand.
+      syncNote("🔍 Looking for a live draft…");
+      await viewerTick();
+      viewerInterval = setInterval(viewerTick, 15_000);
     }
     render();
   }
@@ -341,8 +351,9 @@
     $("#modeBtn").style.opacity = n > 0 ? 0.55 : 1;
     $("#liveBtn").textContent = token ? "🟢 Live" : "🔴 Go Live";
 
-    // viewers follow read-only
-    ["#undoBtn", "#modeBtn", "#resetBtn", "#liveBtn"].forEach((s) => $(s).classList.toggle("hidden", following));
+    // viewers are read-only, but keep "Go Live" visible so the commissioner
+    // can take over from a fresh device
+    ["#undoBtn", "#modeBtn", "#resetBtn"].forEach((s) => $(s).classList.toggle("hidden", following));
 
     renderBoard(justPicked);
     renderRosters(done ? null : managerAt(n));
@@ -419,6 +430,7 @@
     if (!t) return;
     token = t; localStorage.setItem(TOKEN_KEY, t);
     following = false;
+    clearInterval(viewerInterval); viewerInterval = null; // stop following; we're the commissioner now
     $("#liveOverlay").classList.add("hidden");
     syncNote("🟢 Live mode on — publishing picks…");
     remotePut().catch((e) => syncNote(`⚠️ ${e.message}`));
