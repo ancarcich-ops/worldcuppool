@@ -384,9 +384,6 @@
 
     const banners = [];
     if (POOL.settings.sampleDraft) banners.push(`🎲 <b>SAMPLE DRAFT</b> — these team assignments are placeholders until the real draft is entered.`);
-    if (POOL.settings.allowUnowned && state.unowned?.length) {
-      banners.push(`🚫 <b>Out of play:</b> ${state.unowned.map(teamName).map(esc).join(", ")} — undrafted, can't score.`);
-    }
     validatePool().forEach((p) => banners.push(`⚠️ ${esc(p)}`));
     $("#banners").innerHTML = banners.map((b) => `<div class="banner">${b}</div>`).join("");
 
