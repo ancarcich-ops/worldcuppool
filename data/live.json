@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-13T04:47:10.717455Z",
+  "updatedAt": "2026-06-13T20:41:07.610Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -55,11 +55,11 @@
       "stage": "GROUP",
       "group": "B",
       "utcDate": "2026-06-13T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "QAT",
       "away": "SUI",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
