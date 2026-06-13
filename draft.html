@@ -173,19 +173,45 @@
 
   // ── live sync (optional): commissioner publishes picks to the repo,
   //    everyone else follows along read-only ──
-  const REPO = "ancarcich-ops/worldcuppool";
-  const BRANCH = "claude/tender-brahmagupta-cn1d5u";
+  // Auto-detect the repo from the GitHub Pages URL so a forked/duplicated
+  // copy "just works" without editing code. Falls back to this repo when
+  // opened locally (file://) for testing.
+  function detectRepo() {
+    const m = /^([^.]+)\.github\.io$/.exec(location.hostname);
+    if (m) {
+      const owner = m[1];
+      const repo = location.pathname.split("/").filter(Boolean)[0] || `${owner}.github.io`;
+      return { owner: `${owner}/${repo}`, branch: null }; // branch resolved from API
+    }
+    return { owner: "ancarcich-ops/worldcuppool", branch: "claude/tender-brahmagupta-cn1d5u" };
+  }
+  const REPO_CFG = detectRepo();
+  let REPO = REPO_CFG.owner;
+  let BRANCH = REPO_CFG.branch;
   const FILE_URL = `https://api.github.com/repos/${REPO}/contents/data/draft.json`;
   const TOKEN_KEY = "wc26-draft-token";
   let token = localStorage.getItem(TOKEN_KEY) || "";
   let remoteSha = null;
+
+  async function ensureBranch() {
+    if (BRANCH) return BRANCH;
+    try {
+      const headers = { Accept: "application/vnd.github+json" };
+      if (token) headers.Authorization = `Bearer ${token}`;
+      const res = await fetch(`https://api.github.com/repos/${REPO}`, { headers, cache: "no-store" });
+      if (res.ok) BRANCH = (await res.json()).default_branch;
+    } catch { /* leave null; contents API GET still works without ref */ }
+    return BRANCH;
+  }
   let following = false; // true = read-only viewer
   let publishTimer = null;
 
   async function remoteGet() {
+    await ensureBranch();
     const headers = { Accept: "application/vnd.github+json" };
     if (token) headers.Authorization = `Bearer ${token}`;
-    const res = await fetch(`${FILE_URL}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`, { headers, cache: "no-store" });
+    const ref = BRANCH ? `ref=${encodeURIComponent(BRANCH)}&` : "";
+    const res = await fetch(`${FILE_URL}?${ref}t=${Date.now()}`, { headers, cache: "no-store" });
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`GitHub ${res.status}`);
     const data = await res.json();
@@ -194,11 +220,13 @@
 
   async function remotePut(retry = true) {
     if (!token) return;
+    await ensureBranch();
     const body = {
       message: `draft: ${state.picks.length}/${TOTAL} picks`,
       content: btoa(unescape(encodeURIComponent(JSON.stringify(state)))),
       branch: BRANCH,
     };
+    if (!BRANCH) delete body.branch;
     if (remoteSha) body.sha = remoteSha;
     const res = await fetch(FILE_URL, {
       method: "PUT",
