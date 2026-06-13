@@ -506,6 +506,21 @@
     });
   });
 
-  refresh(true);
+  // Demo hook: ?demo=usa replays the USA 4-1 Paraguay full-time card.
+  // Add &loop=1 to keep replaying it.
+  function maybeDemo() {
+    const params = new URLSearchParams(location.search);
+    if (!params.has("demo")) return;
+    const demos = {
+      usa: { id: "demo-usa", stage: "GROUP", group: "D", utcDate: new Date().toISOString(), status: "FINISHED", home: "USA", away: "PAR", homeScore: 4, awayScore: 1, winner: "USA" },
+      draw: { id: "demo-draw", stage: "GROUP", group: "B", utcDate: new Date().toISOString(), status: "FINISHED", home: "CAN", away: "BIH", homeScore: 1, awayScore: 1, winner: null },
+    };
+    const m = demos[params.get("demo")] || demos.usa;
+    const fire = () => { ftQueue.push({ ...m }); if (!ftPlaying) playNextFT(); };
+    fire();
+    if (params.get("loop")) setInterval(fire, 9000);
+  }
+
+  refresh(true).then(maybeDemo);
   setInterval(refresh, REFRESH_MS);
 })();
