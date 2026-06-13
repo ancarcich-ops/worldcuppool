@@ -1,5 +1,10 @@
 /* World Cup Pool dashboard UI */
 (() => {
+  if (typeof TEAMS === "undefined" || typeof POOL === "undefined" || typeof PoolEngine === "undefined") {
+    const b = document.getElementById("banners");
+    if (b) b.innerHTML = '<div class="banner">⚠️ Data failed to load. Hard refresh (Ctrl/Cmd+Shift+R) to retry.</div>';
+    return;
+  }
   const REFRESH_MS = 120_000;
   const $ = (sel, el = document) => el.querySelector(sel);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));

@@ -68,18 +68,27 @@
     Made with ⚽ for the pool · scores sync automatically from the live feed
   </footer>
 
-  <script src="data/teams.js"></script>
   <script>
-    // Load the roster for the selected pool: ?pool=2 → data/pool.2.js (default → data/pool.js).
+    // Load scripts in strict order. ?pool=2 → data/pool.2.js (default → data/pool.js).
+    // Sequential onload chain (no document.write) so it can't race or blank the page.
     (function () {
       var p = new URLSearchParams(location.search).get("pool");
-      var file = (p && /^[a-z0-9_-]+$/i.test(p)) ? "data/pool." + p + ".js" : "data/pool.js";
-      document.write('<script src="' + file + '"><\/script>');
+      var poolFile = (p && /^[a-z0-9_-]+$/i.test(p)) ? "data/pool." + p + ".js" : "data/pool.js";
+      var chain = ["data/teams.js", poolFile, "data/scoring.js", "js/engine.js", "js/app.js"];
+      (function next() {
+        if (!chain.length) return;
+        var src = chain.shift();
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = next;
+        s.onerror = function () {
+          var b = document.getElementById("banners");
+          if (b) b.innerHTML = '<div class="banner">⚠️ Couldn’t load ' + src + '. Try a hard refresh (Ctrl/Cmd+Shift+R).</div>';
+        };
+        document.head.appendChild(s);
+      })();
     })();
   </script>
-  <script src="data/scoring.js"></script>
-  <script src="js/engine.js"></script>
-  <script src="js/app.js"></script>
   <script>
     // Splash screen: pick a random photo, dismiss on click/tap/key.
     (function () {
