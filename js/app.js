@@ -10,6 +10,62 @@
   let firstRender = true;
   let confettiFired = false;
 
+  // ── full-time announcer state ───────────────────────────────────
+  const SEEN_KEY = "wc26-seen-results";
+  let seenResults = loadSeen();
+  let ftQueue = [];
+  let ftPlaying = false;
+  function loadSeen() { try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY)) || []); } catch { return new Set(); } }
+  function saveSeen() { try { localStorage.setItem(SEEN_KEY, JSON.stringify([...seenResults])); } catch {} }
+
+  const rand = (arr) => arr[(Math.random() * arr.length) | 0];
+  const WIN_LINES = [
+    "absolutely demolished", "put on a clinic against", "sent {loser} home crying past",
+    "bullied", "made a mockery of", "ran riot over", "left skid marks on",
+    "danced all over", "took the lunch money of", "dismantled",
+  ];
+  const WIN_PRAISE = [
+    "Pure class. {wOwner} is feasting tonight. 🍽️",
+    "Somebody check on {lOwner} — that was a public execution. 💀",
+    "{winner} look like they want this trophy. {wOwner} is grinning. 😎",
+    "Vintage stuff. Frame it. 🖼️",
+    "{wOwner} just banked the points and the bragging rights. 💰",
+    "That's how you announce yourself at a World Cup. 🔥",
+  ];
+  const LOSE_ROAST = [
+    "{loser} forgot the game was today. {lOwner}, refunds aren't available. 🧾",
+    "{loser} defended like a screen door on a submarine. 🚪",
+    "Book {loser}'s flights home, {lOwner} — they won't need cleats where they're going. ✈️",
+    "That was less a game plan and more a cry for help from {loser}. 😬",
+    "{lOwner} drafted {loser} and got a participation trophy. 🥲",
+    "{loser} touched the ball like it owed them money. ⚽",
+    "Somewhere, {lOwner} is deleting the group chat. 📵",
+  ];
+  const DRAW_JOKES = [
+    "A draw. It's like kissing your hot half-sister — technically something happened, but nobody's proud of it. 💋",
+    "Stalemate. Like kissing your hot half-sister: a little exciting, deeply wrong, zero bragging rights. 😳",
+    "Honors even — the footballing equivalent of kissing your hot half-sister. Felt good, can't tell anyone. 🤐",
+    "Nobody wins. Like making out with your hot half-sister: you'll think about it, but you won't talk about it. 🫣",
+  ];
+
+  function commentaryFor(m) {
+    const draw = m.homeScore === m.awayScore && !m.winner;
+    if (draw) {
+      return { kind: "draw", joke: rand(DRAW_JOKES) };
+    }
+    const winner = m.winner || (m.homeScore > m.awayScore ? m.home : m.away);
+    const loser = winner === m.home ? m.away : m.home;
+    const fill = (s) => s
+      .replaceAll("{winner}", teamName(winner)).replaceAll("{loser}", teamName(loser))
+      .replaceAll("{wOwner}", state.owners[winner] || "Nobody").replaceAll("{lOwner}", state.owners[loser] || "Nobody");
+    return {
+      kind: "result", winner, loser,
+      headline: `${teamName(winner)} ${fill(rand(WIN_LINES))} ${teamName(loser)}`,
+      praise: fill(rand(WIN_PRAISE)),
+      roast: fill(rand(LOSE_ROAST)),
+    };
+  }
+
   // ── helpers ─────────────────────────────────────────────────────
   const flag = (code, size = "w80") => {
     const t = TEAMS[code];
@@ -55,7 +111,7 @@
       if (initial) console.warn("Live data unavailable (file:// mode?) — rendering with seed data.", e);
     }
     recompute();
-    renderAll();
+    renderAll(initial);
   }
 
   function recompute() {
@@ -341,10 +397,104 @@
     })(t0);
   }
 
+  // ── full-time announcer ─────────────────────────────────────────
+  function checkNewResults(initial) {
+    const finished = (state.matches || []).filter((m) => m.status === "FINISHED");
+    if (initial && seenResults.size === 0) {
+      // first ever visit: seed silently so we don't replay the whole tournament
+      finished.forEach((m) => seenResults.add(m.id));
+      saveSeen();
+      return;
+    }
+    const fresh = finished.filter((m) => !seenResults.has(m.id));
+    fresh.sort((a, b) => new Date(a.utcDate || 0) - new Date(b.utcDate || 0));
+    for (const m of fresh) {
+      seenResults.add(m.id);
+      ftQueue.push(m);
+    }
+    if (fresh.length) saveSeen();
+    if (ftQueue.length && !ftPlaying) playNextFT();
+  }
+
+  function playNextFT() {
+    // hold while the splash screen is still up
+    if (document.getElementById("splash")) { ftPlaying = true; setTimeout(playNextFT, 500); return; }
+    const m = ftQueue.shift();
+    if (!m) { ftPlaying = false; return; }
+    ftPlaying = true;
+    const c = commentaryFor(m);
+    const stage = $("#ft-stage");
+    const winSide = (code) => c.kind === "result" && c.winner === code;
+    const loseSide = (code) => c.kind === "result" && c.loser === code;
+
+    stage.className = `ft-stage ft-${c.kind}`;
+    stage.innerHTML = `
+      <div class="ft-card">
+        <button class="ft-close" aria-label="Dismiss">✕</button>
+        <div class="ft-tag">⏱️ FULL TIME${m.group ? ` · Group ${m.group}` : ""}</div>
+        <div class="ft-teams">
+          <div class="ft-team ${winSide(m.home) ? "ft-win" : loseSide(m.home) ? "ft-lose" : ""}">
+            <div class="ft-flagwrap" style="--g:${grad(m.home)}">${flag(m.home)}</div>
+            <div class="ft-name">${esc(teamName(m.home))}</div>
+            <div class="ft-owner">${esc(state.owners[m.home] || "—")}</div>
+          </div>
+          <div class="ft-score"><span class="ft-h">0</span><i>:</i><span class="ft-a">0</span></div>
+          <div class="ft-team ${winSide(m.away) ? "ft-win" : loseSide(m.away) ? "ft-lose" : ""}">
+            <div class="ft-flagwrap" style="--g:${grad(m.away)}">${flag(m.away)}</div>
+            <div class="ft-name">${esc(teamName(m.away))}</div>
+            <div class="ft-owner">${esc(state.owners[m.away] || "—")}</div>
+          </div>
+        </div>
+        ${c.kind === "draw"
+          ? `<div class="ft-headline">🤝 Honors Even</div><div class="ft-commentary">${esc(c.joke)}</div>`
+          : `<div class="ft-headline">${esc(c.headline)}</div>
+             <div class="ft-commentary ft-praise">🏆 ${esc(c.praise)}</div>
+             <div class="ft-commentary ft-roast">🔥 ${esc(c.roast)}</div>`}
+        <div class="ft-progress"><i></i></div>
+      </div>`;
+    stage.classList.remove("hidden");
+    requestAnimationFrame(() => stage.classList.add("ft-show"));
+
+    // animate the scoreline counting up
+    countUpScore(stage.querySelector(".ft-h"), m.homeScore ?? 0);
+    countUpScore(stage.querySelector(".ft-a"), m.awayScore ?? 0);
+
+    if (c.kind !== "draw") setTimeout(confetti, 350);
+
+    const dismiss = () => closeFT();
+    stage.querySelector(".ft-close").onclick = dismiss;
+    stage.onclick = (e) => { if (e.target === stage) dismiss(); };
+    clearTimeout(stage._timer);
+    stage._timer = setTimeout(dismiss, 7000);
+  }
+
+  function closeFT() {
+    const stage = $("#ft-stage");
+    clearTimeout(stage._timer);
+    stage.classList.remove("ft-show");
+    setTimeout(() => {
+      stage.classList.add("hidden");
+      stage.innerHTML = "";
+      if (ftQueue.length) playNextFT(); else ftPlaying = false;
+    }, 420);
+  }
+
+  function countUpScore(el, target) {
+    if (!el) return;
+    const t0 = performance.now(), dur = 700;
+    const tick = (t) => {
+      const k = Math.min(1, (t - t0) / dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(tick); else el.textContent = target;
+    };
+    requestAnimationFrame(tick);
+  }
+
   // ── tabs & boot ─────────────────────────────────────────────────
-  function renderAll() {
+  function renderAll(initial) {
     renderHero(); renderLeaderboard(); renderGroups(); renderMatches(); renderBracket(); renderSpoon(); renderRules();
     firstRender = false;
+    checkNewResults(initial);
   }
 
   document.querySelectorAll(".tab").forEach((tab) => {

@@ -15,7 +15,7 @@ const POOL = {
   },
 
   players: [
-    { name: "Chazz", avatar: "🏍️", teams: ["ESP", "BIH", "PAR"] },
+    { name: "Chazz", avatar: "🎲", teams: ["ESP", "BIH", "PAR"] },
     { name: "Zach", avatar: "👷🏻‍♂️", teams: ["FRA", "ALG", "SCO"] },
     { name: "Trevor", avatar: "🍝", teams: ["ARG", "AUS", "NZL"] },
     { name: "Corbin", avatar: "🥜", teams: ["ENG", "CZE", "GHA"] },
