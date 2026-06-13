@@ -22,30 +22,39 @@
   const WIN_LINES = [
     "absolutely demolished", "put on a clinic against", "sent {loser} home crying past",
     "bullied", "made a mockery of", "ran riot over", "left skid marks on",
-    "danced all over", "took the lunch money of", "dismantled",
+    "danced all over", "took the lunch money of", "dismantled", "curb-stomped",
+    "turned {loser} into a traffic cone against", "treated {loser} like a training drill in",
+    "speedran", "made {loser} file a police report after",
   ];
   const WIN_PRAISE = [
-    "Pure class. {wOwner} is feasting tonight. 🍽️",
-    "Somebody check on {lOwner} — that was a public execution. 💀",
-    "{winner} look like they want this trophy. {wOwner} is grinning. 😎",
-    "Vintage stuff. Frame it. 🖼️",
-    "{wOwner} just banked the points and the bragging rights. 💰",
-    "That's how you announce yourself at a World Cup. 🔥",
+    "Pure class. {wOwner} is eating like a king tonight. 👑🍖",
+    "Somebody do a welfare check on {lOwner} — that was a public execution. 💀",
+    "{winner} look like they actually want this. {wOwner} is insufferable now. 😎",
+    "Frame it, hang it, charge admission. {wOwner} owns this league. 🖼️",
+    "{wOwner} banked the points AND your dignity. Venmo request incoming. 💸",
+    "That's a statement. The rest of the group chat just went quiet. 🔇",
+    "{wOwner}'s phone is already typing the trash talk. Brace yourselves. 📲",
+    "Clinical. {winner} didn't come to play, they came to humiliate. 🔪",
   ];
   const LOSE_ROAST = [
-    "{loser} forgot the game was today. {lOwner}, refunds aren't available. 🧾",
-    "{loser} defended like a screen door on a submarine. 🚪",
-    "Book {loser}'s flights home, {lOwner} — they won't need cleats where they're going. ✈️",
-    "That was less a game plan and more a cry for help from {loser}. 😬",
-    "{lOwner} drafted {loser} and got a participation trophy. 🥲",
-    "{loser} touched the ball like it owed them money. ⚽",
-    "Somewhere, {lOwner} is deleting the group chat. 📵",
+    "{loser} showed up in body, not in spirit. {lOwner}, no refunds. 🧾",
+    "{loser} defended like a screen door on a submarine. 🚪🌊",
+    "Start packing, {lOwner} — {loser} won't need cleats where they're going. 🧳",
+    "That wasn't a game plan, it was a hostage video from {loser}. 📼",
+    "{lOwner} drafted {loser} and somehow finished with less than zero. 🥲",
+    "{loser} treated the ball like it had a restraining order. ⚽🚫",
+    "Quietly, {lOwner} is leaving the group chat and changing their name. 📵",
+    "{loser} brought a spoon to a gunfight. {lOwner} brought the spoon. 🥄",
+    "{loser} played 90 minutes of 'after you, no after you.' Embarrassing. 🙇",
+    "{lOwner}, that wasn't a loss, that was a crime scene. Tape it off. 🚧",
+    "{loser} got their pockets picked in front of the whole world. 👖💨",
   ];
   const DRAW_JOKES = [
     "A draw. It's like kissing your hot half-sister — technically something happened, but nobody's proud of it. 💋",
     "Stalemate. Like kissing your hot half-sister: a little exciting, deeply wrong, zero bragging rights. 😳",
     "Honors even — the footballing equivalent of kissing your hot half-sister. Felt good, can't tell anyone. 🤐",
-    "Nobody wins. Like making out with your hot half-sister: you'll think about it, but you won't talk about it. 🫣",
+    "Nobody wins. Like making out with your hot half-sister: you'll think about it, you'll never speak of it. 🫣",
+    "A point each. Like your hot half-sister: thrilling for a second, then a lifetime of 'why did I do that.' 😬",
   ];
 
   function commentaryFor(m) {
