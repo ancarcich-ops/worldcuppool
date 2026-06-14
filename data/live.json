@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-14T17:50:25.059Z",
+  "updatedAt": "2026-06-14T19:04:09.241Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -103,12 +103,12 @@
       "stage": "GROUP",
       "group": "E",
       "utcDate": "2026-06-14T17:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "GER",
       "away": "CUW",
-      "homeScore": 2,
+      "homeScore": 7,
       "awayScore": 1,
-      "winner": null
+      "winner": "GER"
     },
     {
       "id": "fifa-400021470",
