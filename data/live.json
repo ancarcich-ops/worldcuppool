@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-14T20:40:50.758Z",
+  "updatedAt": "2026-06-14T22:01:05.491Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -115,11 +115,11 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-14T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "NED",
       "away": "JPN",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 2,
+      "awayScore": 2,
       "winner": null
     },
     {
