@@ -16,7 +16,12 @@
   let confettiFired = false;
 
   // ── full-time announcer state ───────────────────────────────────
-  const SEEN_KEY = "wc26-seen-results";
+  // Namespace the "seen" memory per pool. Both pools share the same origin
+  // and reference the same World Cup match IDs, so a single key would let
+  // whichever pool loads first mark every result seen and starve the other
+  // pool's trash talk.
+  const POOL_ID = new URLSearchParams(location.search).get("pool") || "1";
+  const SEEN_KEY = `wc26-seen-results-${POOL_ID}`;
   let seenResults = loadSeen();
   let ftQueue = [];
   let ftPlaying = false;
