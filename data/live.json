@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-15T02:02:54.956Z",
+  "updatedAt": "2026-06-15T07:39:50.964Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -139,12 +139,12 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-15T02:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "SWE",
       "away": "TUN",
-      "homeScore": 0,
-      "awayScore": 0,
-      "winner": null
+      "homeScore": 5,
+      "awayScore": 1,
+      "winner": "SWE"
     },
     {
       "id": "fifa-400021482",
