@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-15T23:21:37.465Z",
+  "updatedAt": "2026-06-16T02:11:03.932Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -175,11 +175,11 @@
       "stage": "GROUP",
       "group": "H",
       "utcDate": "2026-06-15T22:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "KSA",
       "away": "URU",
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
@@ -187,11 +187,11 @@
       "stage": "GROUP",
       "group": "G",
       "utcDate": "2026-06-16T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "IRN",
       "away": "NZL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
