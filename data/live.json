@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-16T07:43:25.802Z",
+  "updatedAt": "2026-06-16T20:37:50.796Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -199,11 +199,11 @@
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-16T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "FRA",
       "away": "SEN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
