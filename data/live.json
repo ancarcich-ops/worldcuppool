@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T20:04:56.016Z",
+  "updatedAt": "2026-06-18T22:25:30.410Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -307,23 +307,23 @@
       "stage": "GROUP",
       "group": "B",
       "utcDate": "2026-06-18T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "SUI",
       "away": "BIH",
-      "homeScore": 0,
-      "awayScore": 0,
-      "winner": null
+      "homeScore": 4,
+      "awayScore": 1,
+      "winner": "SUI"
     },
     {
       "id": "fifa-400021450",
       "stage": "GROUP",
       "group": "B",
       "utcDate": "2026-06-18T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "CAN",
       "away": "QAT",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
