@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T20:06:14.318Z",
+  "updatedAt": "2026-06-19T21:35:13.684Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -343,12 +343,12 @@
       "stage": "GROUP",
       "group": "D",
       "utcDate": "2026-06-19T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "USA",
       "away": "AUS",
       "homeScore": 2,
       "awayScore": 0,
-      "winner": null
+      "winner": "USA"
     },
     {
       "id": "fifa-400021454",
