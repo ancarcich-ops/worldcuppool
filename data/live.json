@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-18T22:25:30.410Z",
+  "updatedAt": "2026-06-19T00:13:01.153Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -319,12 +319,12 @@
       "stage": "GROUP",
       "group": "B",
       "utcDate": "2026-06-18T22:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "CAN",
       "away": "QAT",
-      "homeScore": 1,
+      "homeScore": 6,
       "awayScore": 0,
-      "winner": null
+      "winner": "CAN"
     },
     {
       "id": "fifa-400021442",
