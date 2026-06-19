@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T00:13:01.153Z",
+  "updatedAt": "2026-06-19T05:25:14.525Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -331,12 +331,12 @@
       "stage": "GROUP",
       "group": "A",
       "utcDate": "2026-06-19T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "MEX",
       "away": "KOR",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 0,
+      "winner": "MEX"
     },
     {
       "id": "fifa-400021462",
