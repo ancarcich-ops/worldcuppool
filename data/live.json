@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-19T21:35:13.684Z",
+  "updatedAt": "2026-06-19T22:32:21.441Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -355,11 +355,11 @@
       "stage": "GROUP",
       "group": "C",
       "utcDate": "2026-06-19T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "SCO",
       "away": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
