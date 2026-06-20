@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T02:02:36.921Z",
+  "updatedAt": "2026-06-20T06:41:42.605Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -367,24 +367,24 @@
       "stage": "GROUP",
       "group": "C",
       "utcDate": "2026-06-20T00:30:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "BRA",
       "away": "HAI",
       "homeScore": 3,
       "awayScore": 0,
-      "winner": null
+      "winner": "BRA"
     },
     {
       "id": "fifa-400021460",
       "stage": "GROUP",
       "group": "D",
       "utcDate": "2026-06-20T03:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "TUR",
       "away": "PAR",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 0,
+      "awayScore": 1,
+      "winner": "PAR"
     },
     {
       "id": "fifa-400021472",
