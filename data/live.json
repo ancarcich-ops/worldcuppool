@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T17:06:15.241Z",
+  "updatedAt": "2026-06-20T18:45:37.213Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -394,8 +394,8 @@
       "status": "LIVE",
       "home": "NED",
       "away": "SWE",
-      "homeScore": 1,
-      "awayScore": 0,
+      "homeScore": 4,
+      "awayScore": 1,
       "winner": null
     },
     {
