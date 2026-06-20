@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T20:09:34.979Z",
+  "updatedAt": "2026-06-20T21:40:15.901Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -406,8 +406,8 @@
       "status": "LIVE",
       "home": "GER",
       "away": "CIV",
-      "homeScore": 0,
-      "awayScore": 0,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
