@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T06:41:42.605Z",
+  "updatedAt": "2026-06-20T17:06:15.241Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -391,11 +391,11 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-20T17:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "NED",
       "away": "SWE",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
