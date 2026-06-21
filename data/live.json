@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T18:51:50.062Z",
+  "updatedAt": "2026-06-21T20:19:39.955Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -451,11 +451,11 @@
       "stage": "GROUP",
       "group": "G",
       "utcDate": "2026-06-21T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "BEL",
       "away": "IRN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
