@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-20T22:55:48.079Z",
+  "updatedAt": "2026-06-21T03:52:25.445Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -415,11 +415,11 @@
       "stage": "GROUP",
       "group": "E",
       "utcDate": "2026-06-21T00:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "ECU",
       "away": "CUW",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
