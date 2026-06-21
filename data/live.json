@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T03:52:25.445Z",
+  "updatedAt": "2026-06-21T08:18:43.275Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -427,12 +427,12 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-21T04:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "TUN",
       "away": "JPN",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 0,
+      "awayScore": 4,
+      "winner": "JPN"
     },
     {
       "id": "fifa-400021483",
