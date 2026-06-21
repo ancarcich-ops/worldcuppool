@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-21T21:45:11.214Z",
+  "updatedAt": "2026-06-21T22:57:06.353Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -463,11 +463,11 @@
       "stage": "GROUP",
       "group": "H",
       "utcDate": "2026-06-21T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "URU",
       "away": "CPV",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 1,
       "winner": null
     },
     {
