@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T00:05:16.801Z",
+  "updatedAt": "2026-06-22T05:31:08.404Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -475,12 +475,12 @@
       "stage": "GROUP",
       "group": "G",
       "utcDate": "2026-06-22T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "NZL",
       "away": "EGY",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 3,
+      "winner": "EGY"
     },
     {
       "id": "fifa-400021494",
