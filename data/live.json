@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T19:47:11.901Z",
+  "updatedAt": "2026-06-22T21:53:30.685Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -499,11 +499,11 @@
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-22T21:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "FRA",
       "away": "IRQ",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
