@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T18:59:31.992Z",
+  "updatedAt": "2026-06-23T20:59:48.598Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -535,23 +535,23 @@
       "stage": "GROUP",
       "group": "K",
       "utcDate": "2026-06-23T17:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "POR",
       "away": "UZB",
       "homeScore": 5,
       "awayScore": 0,
-      "winner": null
+      "winner": "POR"
     },
     {
       "id": "fifa-400021506",
       "stage": "GROUP",
       "group": "L",
       "utcDate": "2026-06-23T20:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "ENG",
       "away": "GHA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
