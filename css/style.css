@@ -418,3 +418,73 @@ html.splash-open, html.splash-open body { overflow: hidden; }
   display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 700; letter-spacing: 1px;
   color: var(--gold); text-transform: uppercase; animation: pulse 1.8s ease infinite;
 }
+
+/* ════════════════ Predictions tab ════════════════ */
+.predict-head { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+.predict-head h2 { margin-bottom: 8px; }
+.predict-head p { color: var(--muted); line-height: 1.6; font-size: 14px; }
+.predict-loading { color: var(--gold) !important; font-weight: 600; }
+.rerun-btn {
+  margin-top: 14px; background: var(--bg-card-2); color: var(--text); border: 1px solid var(--line);
+  border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.rerun-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+.predict-table { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+.phead, .prow > summary {
+  display: grid; grid-template-columns: 42px minmax(0, 1fr) 46px minmax(120px, 2.2fr) 64px 56px;
+  align-items: center; gap: 8px;
+}
+.phead { padding: 0 14px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+.prow {
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+}
+.prow > summary {
+  list-style: none; cursor: pointer; padding: 12px 14px; transition: background 0.15s;
+}
+.prow > summary::-webkit-details-marker { display: none; }
+.prow > summary:hover { background: var(--bg-card-2); }
+.prow[open] > summary { background: var(--bg-card-2); border-bottom: 1px solid var(--line); }
+.prank { font-size: 16px; font-weight: 800; text-align: center; }
+.pwho { display: flex; align-items: center; gap: 8px; font-weight: 700; min-width: 0; }
+.pwho .pav { font-size: 18px; }
+.pnow { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 700; }
+.pbarwrap { position: relative; height: 26px; display: flex; align-items: center; }
+.pbar {
+  position: absolute; left: 0; top: 0; bottom: 0; border-radius: 7px;
+  background: linear-gradient(90deg, var(--blue), var(--green)); opacity: 0.85;
+}
+.pproj { position: relative; padding-left: 10px; font-size: 14px; font-weight: 800;
+  color: var(--text); text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75); }
+.pdelta { text-align: right; color: var(--green); font-weight: 700; font-variant-numeric: tabular-nums; }
+.ptitle { text-align: right; color: var(--gold); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.pteams { padding: 6px 14px 14px; display: flex; flex-direction: column; gap: 6px; }
+.pteam {
+  display: grid; grid-template-columns: 28px minmax(0,1fr) auto auto auto; align-items: center; gap: 10px;
+  font-size: 13px; padding: 4px 0; border-top: 1px solid var(--line);
+}
+.pteam:first-child { border-top: none; }
+.pteam .flag { width: 24px; height: auto; border-radius: 3px; }
+.pteam-name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pteam-exp { color: var(--blue); font-weight: 700; white-space: nowrap; }
+.pteam-adv { color: var(--muted); white-space: nowrap; }
+.pteam-champ { color: var(--gold); font-weight: 700; white-space: nowrap; }
+
+.title-race { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.trace {
+  display: grid; grid-template-columns: 30px minmax(0,1fr) auto; align-items: center; gap: 8px;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px;
+}
+.trace .flag { width: 26px; height: auto; border-radius: 3px; }
+.trace-name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trace-owner { display: none; }
+.trace-pct { color: var(--gold); font-weight: 800; font-variant-numeric: tabular-nums; }
+.predict-foot { color: var(--muted); font-size: 12.5px; line-height: 1.6; margin: 16px 4px 0; }
+
+@media (max-width: 560px) {
+  .phead, .prow > summary { grid-template-columns: 30px minmax(0,1fr) 38px minmax(80px,1.6fr) 48px; }
+  .phead .ptitle, .prow > summary .ptitle { display: none; }
+  .pteam { grid-template-columns: 24px minmax(0,1fr) auto; }
+  .pteam-adv { display: none; }
+}

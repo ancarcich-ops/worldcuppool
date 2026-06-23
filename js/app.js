@@ -519,9 +519,142 @@
     requestAnimationFrame(tick);
   }
 
+  // ── predictions (Monte Carlo projection) ────────────────────────
+  let predict = { sig: null, result: null, running: false };
+  function dataSig() {
+    const fin = (state?.matches || []).filter((m) => m.status === "FINISHED").length;
+    return `${fin}|${live.updatedAt || ""}|${POOL.players.length}`;
+  }
+  const predictActive = () => $("#view-predict")?.classList.contains("active");
+
+  function renderPredict() {
+    const el = $("#view-predict");
+    if (!el) return;
+    if (typeof PoolPredictor === "undefined") {
+      el.innerHTML = `<div class="rules-card"><p>⚠️ Prediction engine didn't load. Hard refresh (Ctrl/Cmd+Shift+R).</p></div>`;
+      return;
+    }
+    const sig = dataSig();
+    if (predict.result && predict.sig === sig) { paintPredict(el, predict.result); return; }
+    if (!predictActive()) {
+      if (!el.dataset.ready) { el.innerHTML = predictIntro(); el.dataset.ready = "1"; }
+      return;
+    }
+    runPredict(el, sig);
+  }
+
+  function runPredict(el, sig) {
+    if (predict.running) return;
+    predict.running = true;
+    el.innerHTML = predictLoading();
+    el.dataset.ready = "1";
+    // let the loading state paint before the (heavy) synchronous sim
+    setTimeout(() => {
+      try {
+        const result = PoolPredictor.project({
+          teams: TEAMS, groups: GROUPS, matches: state.matches,
+          scoring: SCORING, pool: POOL, sims: 8000,
+        });
+        predict = { sig, result, running: false };
+        paintPredict(el, result);
+      } catch (e) {
+        predict.running = false;
+        el.innerHTML = `<div class="rules-card"><p>⚠️ Couldn't run the projection: ${esc(String(e))}</p></div>`;
+      }
+    }, 40);
+  }
+
+  function predictIntro() {
+    return `<div class="predict-head">
+      <h2>🔮 Final-Standings Projection</h2>
+      <p>A Monte-Carlo crystal ball: thousands of simulated run-outs of every remaining
+         match, scored with the real pool rules. Open this tab to run it.</p>
+    </div>`;
+  }
+  function predictLoading() {
+    return `<div class="predict-head">
+      <h2>🔮 Final-Standings Projection</h2>
+      <p class="predict-loading">⚙️ Simulating the rest of the tournament 8,000 times…</p>
+    </div>`;
+  }
+
+  function paintPredict(el, r) {
+    const nowByName = Object.fromEntries((state.players || []).map((p) => [p.name, p.total]));
+    const maxProj = Math.max(1, ...r.owners.map((o) => o.projected));
+    const pct = (x) => (x >= 0.995 ? "99%" : x < 0.005 ? "<1%" : Math.round(x * 100) + "%");
+    const medals = ["🥇", "🥈", "🥉"];
+
+    // title race: strongest teams by championship probability
+    const titleRace = Object.keys(r.teamChamp)
+      .map((c) => ({ code: c, champ: r.teamChamp[c], owner: state.owners[c] }))
+      .filter((t) => t.champ > 0.002)
+      .sort((a, b) => b.champ - a.champ).slice(0, 8);
+
+    const rows = r.owners.map((o) => {
+      const now = nowByName[o.name] ?? 0;
+      const delta = o.projected - now;
+      const teamList = o.teams.map((t) => {
+        const owned = state.owners[t.code]; // always true here
+        return `<div class="pteam">
+            ${flag(t.code, "w40")}
+            <span class="pteam-name">${esc(teamName(t.code))}</span>
+            <span class="pteam-exp">${t.exp.toFixed(1)} pts proj</span>
+            <span class="pteam-adv">${pct(t.advance)} R32</span>
+            <span class="pteam-champ">${pct(t.champ)} 🏆</span>
+          </div>`;
+      }).join("");
+      return `<details class="prow">
+        <summary>
+          <span class="prank">${medals[o.projRank - 1] || "#" + o.projRank}</span>
+          <span class="pwho"><span class="pav">${o.avatar}</span>${esc(o.name)}</span>
+          <span class="pnow">${now.toFixed(0)}</span>
+          <span class="pbarwrap"><span class="pbar" style="width:${Math.round((o.projected / maxProj) * 100)}%"></span>
+            <b class="pproj">${o.projected.toFixed(1)}</b></span>
+          <span class="pdelta">+${delta.toFixed(1)}</span>
+          <span class="ptitle">${pct(o.champPct)}</span>
+        </summary>
+        <div class="pteams">${teamList}</div>
+      </details>`;
+    }).join("");
+
+    el.innerHTML = `
+      <div class="predict-head">
+        <h2>🔮 Final-Standings Projection</h2>
+        <p>${r.sims.toLocaleString()} Monte-Carlo simulations of every remaining match. Already-played
+           results are locked in; the rest is simulated from market-derived team strength
+           (France favorite, then Spain · England · Argentina · the heavyweights). Knockout matchups
+           are drawn probabilistically until the bracket locks. A projection — not a promise.</p>
+        <button id="rerun-predict" class="rerun-btn">↻ Re-run simulation</button>
+      </div>
+      <div class="predict-table">
+        <div class="phead">
+          <span class="prank">#</span><span class="pwho">Player</span>
+          <span class="pnow">Now</span><span class="pbarwrap">Projected final</span>
+          <span class="pdelta">To come</span><span class="ptitle">Title</span>
+        </div>
+        ${rows}
+      </div>
+      <h3 class="section-title">🏆 Title race</h3>
+      <div class="title-race">
+        ${titleRace.map((t) => `<div class="trace">
+            ${flag(t.code, "w40")}
+            <span class="trace-name">${esc(teamName(t.code))}</span>
+            <span class="trace-owner">${t.owner ? esc(t.owner) : "—"}</span>
+            <span class="trace-pct">${pct(t.champ)}</span>
+          </div>`).join("")}
+      </div>
+      <p class="predict-foot">“Now” is points already banked. “Projected final” is the average across all
+         simulations (your floor plus everything still to be won). “Title” is the chance one of your teams
+         lifts the trophy.</p>`;
+
+    const btn = $("#rerun-predict", el);
+    if (btn) btn.onclick = () => { predict.result = null; predict.sig = null; runPredict(el, dataSig()); };
+  }
+
   // ── tabs & boot ─────────────────────────────────────────────────
   function renderAll(initial) {
     renderHero(); renderLeaderboard(); renderGroups(); renderMatches(); renderBracket(); renderSpoon(); renderRules();
+    renderPredict();
     firstRender = false;
     checkNewResults(initial);
   }
@@ -530,6 +663,7 @@
     tab.addEventListener("click", () => {
       document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === tab));
       document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${tab.dataset.view}` || (tab.dataset.view === "leaderboard" && v.id === "view-leaderboard")));
+      if (tab.dataset.view === "predict") renderPredict();
     });
   });
 

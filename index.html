@@ -43,6 +43,7 @@
     <button class="tab" data-view="groups">📊 Groups</button>
     <button class="tab" data-view="matches">⚽ Matches</button>
     <button class="tab" data-view="bracket">🗺️ Bracket</button>
+    <button class="tab" data-view="predict">🔮 Predictions</button>
     <button class="tab" data-view="spoon">🥄 Wooden Spoon</button>
     <button class="tab" data-view="rules">📜 Scoring</button>
   </nav>
@@ -52,6 +53,7 @@
     <section id="view-groups" class="view grid-view"></section>
     <section id="view-matches" class="view"></section>
     <section id="view-bracket" class="view"></section>
+    <section id="view-predict" class="view"></section>
     <section id="view-spoon" class="view"></section>
     <section id="view-rules" class="view">
       <div class="rules-card">
@@ -74,7 +76,7 @@
     (function () {
       var p = new URLSearchParams(location.search).get("pool");
       var poolFile = (p && /^[a-z0-9_-]+$/i.test(p)) ? "data/pool." + p + ".js" : "data/pool.js";
-      var chain = ["data/teams.js", poolFile, "data/scoring.js", "js/engine.js", "js/app.js"];
+      var chain = ["data/teams.js", poolFile, "data/scoring.js", "js/engine.js", "js/predict.js", "js/app.js"];
       (function next() {
         if (!chain.length) return;
         var src = chain.shift();
