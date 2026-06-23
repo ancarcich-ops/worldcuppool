@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T20:59:48.598Z",
+  "updatedAt": "2026-06-23T22:13:24.557Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -547,7 +547,7 @@
       "stage": "GROUP",
       "group": "L",
       "utcDate": "2026-06-23T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ENG",
       "away": "GHA",
       "homeScore": 0,
