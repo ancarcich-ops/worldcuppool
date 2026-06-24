@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T21:45:55.205Z",
+  "updatedAt": "2026-06-24T22:57:48.573Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -607,11 +607,11 @@
       "stage": "GROUP",
       "group": "C",
       "utcDate": "2026-06-24T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "MAR",
       "away": "HAI",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 2,
       "winner": null
     },
     {
@@ -619,11 +619,11 @@
       "stage": "GROUP",
       "group": "C",
       "utcDate": "2026-06-24T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "SCO",
       "away": "BRA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 2,
       "winner": null
     },
     {
