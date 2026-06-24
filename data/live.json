@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T23:30:50.605Z",
+  "updatedAt": "2026-06-24T01:27:49.860Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -559,12 +559,12 @@
       "stage": "GROUP",
       "group": "L",
       "utcDate": "2026-06-23T23:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "PAN",
       "away": "CRO",
       "homeScore": 0,
-      "awayScore": 0,
-      "winner": null
+      "awayScore": 1,
+      "winner": "CRO"
     },
     {
       "id": "fifa-400021501",
