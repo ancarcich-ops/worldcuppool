@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T22:08:04.947Z",
+  "updatedAt": "2026-06-25T23:45:55.361Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -679,11 +679,11 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-25T23:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "TUN",
       "away": "NED",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 2,
       "winner": null
     },
     {
@@ -691,11 +691,11 @@
       "stage": "GROUP",
       "group": "F",
       "utcDate": "2026-06-25T23:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "JPN",
       "away": "SWE",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
