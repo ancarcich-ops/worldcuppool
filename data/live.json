@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T00:05:12.417Z",
+  "updatedAt": "2026-06-25T04:34:22.275Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -631,24 +631,24 @@
       "stage": "GROUP",
       "group": "A",
       "utcDate": "2026-06-25T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "RSA",
       "away": "KOR",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 0,
+      "winner": "RSA"
     },
     {
       "id": "fifa-400021444",
       "stage": "GROUP",
       "group": "A",
       "utcDate": "2026-06-25T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "CZE",
       "away": "MEX",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 0,
+      "awayScore": 3,
+      "winner": "MEX"
     },
     {
       "id": "fifa-400021468",
@@ -862,6 +862,18 @@
       "status": "SCHEDULED",
       "home": "JOR",
       "away": "ARG",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021518",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-06-28T19:00:00Z",
+      "status": "SCHEDULED",
+      "home": "RSA",
+      "away": "CAN",
       "homeScore": null,
       "awayScore": null,
       "winner": null
