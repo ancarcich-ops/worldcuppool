@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T20:33:46.984Z",
+  "updatedAt": "2026-06-25T22:08:04.947Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -655,24 +655,24 @@
       "stage": "GROUP",
       "group": "E",
       "utcDate": "2026-06-25T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "CUW",
       "away": "CIV",
       "homeScore": 0,
-      "awayScore": 1,
-      "winner": null
+      "awayScore": 2,
+      "winner": "CIV"
     },
     {
       "id": "fifa-400021466",
       "stage": "GROUP",
       "group": "E",
       "utcDate": "2026-06-25T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ECU",
       "away": "GER",
-      "homeScore": 1,
+      "homeScore": 2,
       "awayScore": 1,
-      "winner": null
+      "winner": "ECU"
     },
     {
       "id": "fifa-400021473",
