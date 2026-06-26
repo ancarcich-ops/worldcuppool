@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T20:20:51.739Z",
+  "updatedAt": "2026-06-26T21:50:05.366Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -727,24 +727,24 @@
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-26T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "SEN",
       "away": "IRQ",
-      "homeScore": 1,
+      "homeScore": 5,
       "awayScore": 0,
-      "winner": null
+      "winner": "SEN"
     },
     {
       "id": "fifa-400021489",
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-26T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "NOR",
       "away": "FRA",
       "homeScore": 1,
-      "awayScore": 3,
-      "winner": null
+      "awayScore": 4,
+      "winner": "FRA"
     },
     {
       "id": "fifa-400021484",
@@ -898,6 +898,18 @@
       "status": "SCHEDULED",
       "home": "NED",
       "away": "MAR",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021514",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-06-30T17:00:00Z",
+      "status": "SCHEDULED",
+      "home": "CIV",
+      "away": "NOR",
       "homeScore": null,
       "awayScore": null,
       "winner": null
