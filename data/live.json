@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T06:29:13.333Z",
+  "updatedAt": "2026-06-26T20:20:51.739Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -727,11 +727,11 @@
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-26T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "SEN",
       "away": "IRQ",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
@@ -739,11 +739,11 @@
       "stage": "GROUP",
       "group": "I",
       "utcDate": "2026-06-26T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "NOR",
       "away": "FRA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 3,
       "winner": null
     },
     {
