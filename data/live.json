@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T02:00:54.108Z",
+  "updatedAt": "2026-06-26T06:29:13.333Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -703,7 +703,7 @@
       "stage": "GROUP",
       "group": "D",
       "utcDate": "2026-06-26T02:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "PAR",
       "away": "AUS",
       "homeScore": 0,
@@ -715,12 +715,12 @@
       "stage": "GROUP",
       "group": "D",
       "utcDate": "2026-06-26T02:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "TUR",
       "away": "USA",
-      "homeScore": 0,
-      "awayScore": 0,
-      "winner": null
+      "homeScore": 3,
+      "awayScore": 2,
+      "winner": "TUR"
     },
     {
       "id": "fifa-400021493",
