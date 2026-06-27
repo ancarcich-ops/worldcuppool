@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T02:55:40.325Z",
+  "updatedAt": "2026-06-27T06:19:58.650Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -775,23 +775,23 @@
       "stage": "GROUP",
       "group": "G",
       "utcDate": "2026-06-27T03:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "NZL",
       "away": "BEL",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 5,
+      "winner": "BEL"
     },
     {
       "id": "fifa-400021479",
       "stage": "GROUP",
       "group": "G",
       "utcDate": "2026-06-27T03:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "EGY",
       "away": "IRN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
@@ -946,6 +946,18 @@
       "status": "SCHEDULED",
       "home": "USA",
       "away": "BIH",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021515",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-03T18:00:00Z",
+      "status": "SCHEDULED",
+      "home": "AUS",
+      "away": "EGY",
       "homeScore": null,
       "awayScore": null,
       "winner": null
