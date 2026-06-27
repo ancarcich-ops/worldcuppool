@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T21:19:35.297Z",
+  "updatedAt": "2026-06-27T22:31:17.192Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -803,7 +803,7 @@
       "home": "PAN",
       "away": "ENG",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 2,
       "winner": null
     },
     {
@@ -814,7 +814,7 @@
       "status": "LIVE",
       "home": "CRO",
       "away": "GHA",
-      "homeScore": 0,
+      "homeScore": 1,
       "awayScore": 0,
       "winner": null
     },
