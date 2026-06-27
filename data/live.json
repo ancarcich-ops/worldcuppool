@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-26T21:50:05.366Z",
+  "updatedAt": "2026-06-27T02:55:40.325Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -751,23 +751,23 @@
       "stage": "GROUP",
       "group": "H",
       "utcDate": "2026-06-27T00:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "URU",
       "away": "ESP",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 0,
+      "awayScore": 1,
+      "winner": "ESP"
     },
     {
       "id": "fifa-400021485",
       "stage": "GROUP",
       "group": "H",
       "utcDate": "2026-06-27T00:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "CPV",
       "away": "KSA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
@@ -891,6 +891,18 @@
       "winner": null
     },
     {
+      "id": "fifa-400021513",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-06-29T20:30:00Z",
+      "status": "SCHEDULED",
+      "home": "GER",
+      "away": "PAR",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
       "id": "fifa-400021522",
       "stage": "R32",
       "group": null,
@@ -915,6 +927,18 @@
       "winner": null
     },
     {
+      "id": "fifa-400021523",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-06-30T21:00:00Z",
+      "status": "SCHEDULED",
+      "home": "FRA",
+      "away": "SWE",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
       "id": "fifa-400021524",
       "stage": "R32",
       "group": null,
@@ -922,6 +946,18 @@
       "status": "SCHEDULED",
       "home": "USA",
       "away": "BIH",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021521",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-03T22:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ARG",
+      "away": "CPV",
       "homeScore": null,
       "awayScore": null,
       "winner": null
