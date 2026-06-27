@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T06:19:58.650Z",
+  "updatedAt": "2026-06-27T21:19:35.297Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -799,11 +799,11 @@
       "stage": "GROUP",
       "group": "L",
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "PAN",
       "away": "ENG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
@@ -811,11 +811,11 @@
       "stage": "GROUP",
       "group": "L",
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "CRO",
       "away": "GHA",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
