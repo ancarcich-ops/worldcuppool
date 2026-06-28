@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T23:36:30.254Z",
+  "updatedAt": "2026-06-28T01:36:37.606Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -823,19 +823,19 @@
       "stage": "GROUP",
       "group": "K",
       "utcDate": "2026-06-27T23:30:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "COD",
       "away": "UZB",
-      "homeScore": 0,
-      "awayScore": 0,
-      "winner": null
+      "homeScore": 3,
+      "awayScore": 1,
+      "winner": "COD"
     },
     {
       "id": "fifa-400021505",
       "stage": "GROUP",
       "group": "K",
       "utcDate": "2026-06-27T23:30:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "COL",
       "away": "POR",
       "homeScore": 0,
@@ -951,6 +951,30 @@
       "winner": null
     },
     {
+      "id": "fifa-400021512",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-01T16:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ENG",
+      "away": "COD",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021525",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-01T20:00:00Z",
+      "status": "SCHEDULED",
+      "home": "BEL",
+      "away": "SEN",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
       "id": "fifa-400021524",
       "stage": "R32",
       "group": null,
@@ -958,6 +982,18 @@
       "status": "SCHEDULED",
       "home": "USA",
       "away": "BIH",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021526",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-02T23:00:00Z",
+      "status": "SCHEDULED",
+      "home": "POR",
+      "away": "CRO",
       "homeScore": null,
       "awayScore": null,
       "winner": null
@@ -982,6 +1018,18 @@
       "status": "SCHEDULED",
       "home": "ARG",
       "away": "CPV",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021517",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-04T01:30:00Z",
+      "status": "SCHEDULED",
+      "home": "COL",
+      "away": "GHA",
       "homeScore": null,
       "awayScore": null,
       "winner": null
