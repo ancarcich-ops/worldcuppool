@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T01:36:37.606Z",
+  "updatedAt": "2026-06-28T05:58:35.072Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -847,11 +847,11 @@
       "stage": "GROUP",
       "group": "J",
       "utcDate": "2026-06-28T02:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "ALG",
       "away": "AUT",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 3,
+      "awayScore": 3,
       "winner": null
     },
     {
@@ -859,12 +859,12 @@
       "stage": "GROUP",
       "group": "J",
       "utcDate": "2026-06-28T02:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "JOR",
       "away": "ARG",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 3,
+      "winner": "ARG"
     },
     {
       "id": "fifa-400021518",
@@ -987,6 +987,18 @@
       "winner": null
     },
     {
+      "id": "fifa-400021519",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-02T19:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ESP",
+      "away": "AUT",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
       "id": "fifa-400021526",
       "stage": "R32",
       "group": null,
@@ -994,6 +1006,18 @@
       "status": "SCHEDULED",
       "home": "POR",
       "away": "CRO",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021527",
+      "stage": "R32",
+      "group": null,
+      "utcDate": "2026-07-03T03:00:00Z",
+      "status": "SCHEDULED",
+      "home": "SUI",
+      "away": "ALG",
       "homeScore": null,
       "awayScore": null,
       "winner": null
