@@ -594,12 +594,11 @@
       const now = nowByName[o.name] ?? 0;
       const delta = o.projected - now;
       const teamList = o.teams.map((t) => {
-        const owned = state.owners[t.code]; // always true here
         return `<div class="pteam">
             ${flag(t.code, "w40")}
             <span class="pteam-name">${esc(teamName(t.code))}</span>
             <span class="pteam-exp">${t.exp.toFixed(1)} pts proj</span>
-            <span class="pteam-adv">${pct(t.advance)} R32</span>
+            <span class="pteam-adv">${pct(t.advance)} to KO</span>
             <span class="pteam-champ">${pct(t.champ)} 🏆</span>
           </div>`;
       }).join("");
@@ -620,10 +619,10 @@
     el.innerHTML = `
       <div class="predict-head">
         <h2>🔮 Final-Standings Projection</h2>
-        <p>${r.sims.toLocaleString()} Monte-Carlo simulations of every remaining match. Already-played
-           results are locked in; the rest is simulated from market-derived team strength
-           (France favorite, then Spain · England · Argentina · the heavyweights). Knockout matchups
-           are drawn probabilistically until the bracket locks. A projection — not a promise.</p>
+        <p>Knockout odds come from <b>Opta Analyst's official tournament prediction</b>
+           (${esc(r.source.split("·")[1].trim())}) — their per-round survival probabilities for the
+           contenders, with the rest of the field filling the residual. Group-stage points are
+           simulated from the current real results over ${r.sims.toLocaleString()} run-outs. A projection — not a promise.</p>
         <button id="rerun-predict" class="rerun-btn">↻ Re-run simulation</button>
       </div>
       <div class="predict-table">
@@ -634,7 +633,7 @@
         </div>
         ${rows}
       </div>
-      <h3 class="section-title">🏆 Title race</h3>
+      <h3 class="section-title">🏆 Title race — Opta win probability</h3>
       <div class="title-race">
         ${titleRace.map((t) => `<div class="trace">
             ${flag(t.code, "w40")}
@@ -643,9 +642,9 @@
             <span class="trace-pct">${pct(t.champ)}</span>
           </div>`).join("")}
       </div>
-      <p class="predict-foot">“Now” is points already banked. “Projected final” is the average across all
-         simulations (your floor plus everything still to be won). “Title” is the chance one of your teams
-         lifts the trophy.</p>`;
+      <p class="predict-foot">“Now” is points already banked. “Projected final” is your floor plus everything
+         still to be won. “Title” is the chance one of your teams lifts the trophy, per Opta. Knockout
+         probabilities: <b>Opta Analyst</b>; group-stage points: simulated from live results.</p>`;
 
     const btn = $("#rerun-predict", el);
     if (btn) btn.onclick = () => { predict.result = null; predict.sig = null; runPredict(el, dataSig()); };
