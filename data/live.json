@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T05:58:35.072Z",
+  "updatedAt": "2026-06-28T19:08:15.052Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -871,11 +871,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-28T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "RSA",
       "away": "CAN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
