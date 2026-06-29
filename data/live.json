@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T21:43:09.692Z",
+  "updatedAt": "2026-06-29T18:23:42.154Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -883,11 +883,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-29T17:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "BRA",
       "away": "JPN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
