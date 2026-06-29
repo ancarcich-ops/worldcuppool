@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T20:28:33.887Z",
+  "updatedAt": "2026-06-29T21:55:37.756Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -895,11 +895,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-29T20:30:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "GER",
       "away": "PAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 1,
       "winner": null
     },
     {
