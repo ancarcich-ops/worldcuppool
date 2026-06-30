@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T06:12:55.799Z",
+  "updatedAt": "2026-06-30T17:16:12.920Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -919,11 +919,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-30T17:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "CIV",
       "away": "NOR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
