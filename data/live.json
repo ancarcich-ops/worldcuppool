@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-29T23:50:17.621Z",
+  "updatedAt": "2026-06-30T01:59:46.270Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -907,11 +907,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-30T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "NED",
       "away": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
