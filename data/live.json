@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T22:40:13.637Z",
+  "updatedAt": "2026-06-30T23:55:39.013Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -931,12 +931,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-06-30T21:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "FRA",
       "away": "SWE",
       "homeScore": 3,
       "awayScore": 0,
-      "winner": null
+      "winner": "FRA"
     },
     {
       "id": "fifa-400021520",
@@ -1066,6 +1066,18 @@
       "status": "SCHEDULED",
       "home": "CAN",
       "away": "MAR",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021533",
+      "stage": "R16",
+      "group": null,
+      "utcDate": "2026-07-04T21:00:00Z",
+      "status": "SCHEDULED",
+      "home": "PAR",
+      "away": "FRA",
       "homeScore": null,
       "awayScore": null,
       "winner": null
