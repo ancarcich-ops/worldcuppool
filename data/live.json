@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T21:10:18.354Z",
+  "updatedAt": "2026-07-01T22:40:03.991Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -970,8 +970,8 @@
       "status": "LIVE",
       "home": "BEL",
       "away": "SEN",
-      "homeScore": 0,
-      "awayScore": 1,
+      "homeScore": 2,
+      "awayScore": 2,
       "winner": null
     },
     {
