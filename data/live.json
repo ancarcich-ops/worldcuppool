@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T17:49:25.455Z",
+  "updatedAt": "2026-07-01T19:26:30.169Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -955,12 +955,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-01T16:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ENG",
       "away": "COD",
       "homeScore": 2,
       "awayScore": 1,
-      "winner": null
+      "winner": "ENG"
     },
     {
       "id": "fifa-400021525",
@@ -1090,6 +1090,18 @@
       "status": "SCHEDULED",
       "home": "BRA",
       "away": "NOR",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021531",
+      "stage": "R16",
+      "group": null,
+      "utcDate": "2026-07-06T00:00:00Z",
+      "status": "SCHEDULED",
+      "home": "MEX",
+      "away": "ENG",
       "homeScore": null,
       "awayScore": null,
       "winner": null
