@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T19:26:30.169Z",
+  "updatedAt": "2026-07-01T21:10:18.354Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -967,11 +967,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-01T20:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "BEL",
       "away": "SEN",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
