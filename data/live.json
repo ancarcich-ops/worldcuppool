@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T21:32:24.267Z",
+  "updatedAt": "2026-07-02T23:53:51.096Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1003,11 +1003,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-02T23:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "POR",
       "away": "CRO",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
