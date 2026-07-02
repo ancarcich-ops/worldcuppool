@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T23:53:02.105Z",
+  "updatedAt": "2026-07-02T01:58:50.042Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -979,11 +979,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-02T00:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "USA",
       "away": "BIH",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 2,
+      "awayScore": 0,
       "winner": null
     },
     {
