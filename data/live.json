@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-02T20:12:59.454Z",
+  "updatedAt": "2026-07-02T21:32:24.267Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -991,12 +991,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-02T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ESP",
       "away": "AUT",
-      "homeScore": 1,
+      "homeScore": 3,
       "awayScore": 0,
-      "winner": null
+      "winner": "ESP"
     },
     {
       "id": "fifa-400021526",
