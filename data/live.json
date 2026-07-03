@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T19:49:28.395Z",
+  "updatedAt": "2026-07-03T21:53:36.736Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1027,12 +1027,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-03T18:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "AUS",
       "away": "EGY",
       "homeScore": 1,
       "awayScore": 1,
-      "winner": null
+      "winner": "EGY"
     },
     {
       "id": "fifa-400021521",
