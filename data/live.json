@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T21:53:36.736Z",
+  "updatedAt": "2026-07-03T22:51:28.531Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1039,11 +1039,11 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-03T22:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "ARG",
       "away": "CPV",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 0,
       "winner": null
     },
     {
