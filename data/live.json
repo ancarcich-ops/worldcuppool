@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T22:51:28.531Z",
+  "updatedAt": "2026-07-03T23:53:43.166Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1043,7 +1043,7 @@
       "home": "ARG",
       "away": "CPV",
       "homeScore": 1,
-      "awayScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
