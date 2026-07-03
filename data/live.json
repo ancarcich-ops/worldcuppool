@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T01:29:39.510Z",
+  "updatedAt": "2026-07-03T05:32:57.313Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1015,12 +1015,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-03T03:00:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "SUI",
       "away": "ALG",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 2,
+      "awayScore": 0,
+      "winner": "SUI"
     },
     {
       "id": "fifa-400021515",
