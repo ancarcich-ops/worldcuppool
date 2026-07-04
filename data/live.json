@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T17:52:42.176Z",
+  "updatedAt": "2026-07-04T18:50:39.374Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1067,7 +1067,7 @@
       "home": "CAN",
       "away": "MAR",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 2,
       "winner": null
     },
     {
