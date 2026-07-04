@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T01:29:09.631Z",
+  "updatedAt": "2026-07-04T05:26:40.894Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1051,12 +1051,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-04T01:30:00Z",
-      "status": "SCHEDULED",
+      "status": "FINISHED",
       "home": "COL",
       "away": "GHA",
-      "homeScore": null,
-      "awayScore": null,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 0,
+      "winner": "COL"
     },
     {
       "id": "fifa-400021530",
@@ -1138,6 +1138,18 @@
       "status": "SCHEDULED",
       "home": "ARG",
       "away": "EGY",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021535",
+      "stage": "R16",
+      "group": null,
+      "utcDate": "2026-07-07T20:00:00Z",
+      "status": "SCHEDULED",
+      "home": "SUI",
+      "away": "COL",
       "homeScore": null,
       "awayScore": null,
       "winner": null
