@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T23:53:43.166Z",
+  "updatedAt": "2026-07-04T01:29:09.631Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1039,12 +1039,12 @@
       "stage": "R32",
       "group": null,
       "utcDate": "2026-07-03T22:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ARG",
       "away": "CPV",
-      "homeScore": 1,
-      "awayScore": 1,
-      "winner": null
+      "homeScore": 3,
+      "awayScore": 2,
+      "winner": "ARG"
     },
     {
       "id": "fifa-400021517",
@@ -1126,6 +1126,18 @@
       "status": "SCHEDULED",
       "home": "USA",
       "away": "BEL",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021528",
+      "stage": "R16",
+      "group": null,
+      "utcDate": "2026-07-07T16:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ARG",
+      "away": "EGY",
       "homeScore": null,
       "awayScore": null,
       "winner": null
