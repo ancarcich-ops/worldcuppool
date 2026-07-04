@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T05:26:40.894Z",
+  "updatedAt": "2026-07-04T17:52:42.176Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1063,11 +1063,11 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-04T17:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "CAN",
       "away": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
