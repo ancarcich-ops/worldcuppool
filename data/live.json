@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-05T20:43:58.307Z",
+  "updatedAt": "2026-07-05T21:47:18.146Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1091,7 +1091,7 @@
       "home": "BRA",
       "away": "NOR",
       "homeScore": 0,
-      "awayScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
