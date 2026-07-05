@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-05T21:47:18.146Z",
+  "updatedAt": "2026-07-05T22:45:47.474Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1087,12 +1087,12 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-05T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "BRA",
       "away": "NOR",
-      "homeScore": 0,
-      "awayScore": 1,
-      "winner": null
+      "homeScore": 1,
+      "awayScore": 2,
+      "winner": "NOR"
     },
     {
       "id": "fifa-400021531",
