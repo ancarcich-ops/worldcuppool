@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T06:14:55.115Z",
+  "updatedAt": "2026-07-06T19:20:15.123Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1111,11 +1111,11 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-06T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "POR",
       "away": "ESP",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
