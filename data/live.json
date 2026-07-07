@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T19:22:57.252Z",
+  "updatedAt": "2026-07-07T21:08:53.082Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1147,11 +1147,11 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-07T20:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "SUI",
       "away": "COL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
