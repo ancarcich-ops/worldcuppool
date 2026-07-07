@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-06T21:12:20.643Z",
+  "updatedAt": "2026-07-07T01:48:30.428Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1123,11 +1123,11 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-07T00:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "USA",
       "away": "BEL",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 1,
+      "awayScore": 3,
       "winner": null
     },
     {
