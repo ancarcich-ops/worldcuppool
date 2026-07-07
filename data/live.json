@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T21:08:53.082Z",
+  "updatedAt": "2026-07-07T23:31:57.483Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1147,12 +1147,12 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-07T20:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "SUI",
       "away": "COL",
       "homeScore": 0,
       "awayScore": 0,
-      "winner": null
+      "winner": "SUI"
     },
     {
       "id": "fifa-400021536",
@@ -1186,6 +1186,18 @@
       "status": "SCHEDULED",
       "home": "NOR",
       "away": "ENG",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021537",
+      "stage": "QF",
+      "group": null,
+      "utcDate": "2026-07-12T01:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ARG",
+      "away": "SUI",
       "homeScore": null,
       "awayScore": null,
       "winner": null
