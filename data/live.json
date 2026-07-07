@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T17:26:08.419Z",
+  "updatedAt": "2026-07-07T19:22:57.252Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1135,12 +1135,12 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-07T16:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ARG",
       "away": "EGY",
-      "homeScore": 0,
-      "awayScore": 1,
-      "winner": null
+      "homeScore": 3,
+      "awayScore": 2,
+      "winner": "ARG"
     },
     {
       "id": "fifa-400021535",
