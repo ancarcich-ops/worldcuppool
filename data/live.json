@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T01:48:30.428Z",
+  "updatedAt": "2026-07-07T05:55:54.635Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1123,12 +1123,12 @@
       "stage": "R16",
       "group": null,
       "utcDate": "2026-07-07T00:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "USA",
       "away": "BEL",
       "homeScore": 1,
-      "awayScore": 3,
-      "winner": null
+      "awayScore": 4,
+      "winner": "BEL"
     },
     {
       "id": "fifa-400021528",
@@ -1162,6 +1162,18 @@
       "status": "SCHEDULED",
       "home": "FRA",
       "away": "MAR",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021538",
+      "stage": "QF",
+      "group": null,
+      "utcDate": "2026-07-10T19:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ESP",
+      "away": "BEL",
       "homeScore": null,
       "awayScore": null,
       "winner": null
