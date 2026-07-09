@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-07T23:31:57.483Z",
+  "updatedAt": "2026-07-09T20:47:02.086Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1159,11 +1159,11 @@
       "stage": "QF",
       "group": null,
       "utcDate": "2026-07-09T20:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "FRA",
       "away": "MAR",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
