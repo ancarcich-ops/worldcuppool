@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-11T22:27:09.905Z",
+  "updatedAt": "2026-07-11T23:32:29.482Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1187,7 +1187,7 @@
       "home": "NOR",
       "away": "ENG",
       "homeScore": 1,
-      "awayScore": 1,
+      "awayScore": 2,
       "winner": null
     },
     {
