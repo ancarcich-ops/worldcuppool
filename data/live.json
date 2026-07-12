@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-11T23:32:29.482Z",
+  "updatedAt": "2026-07-12T01:08:20.018Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1183,23 +1183,23 @@
       "stage": "QF",
       "group": null,
       "utcDate": "2026-07-11T21:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "NOR",
       "away": "ENG",
       "homeScore": 1,
       "awayScore": 2,
-      "winner": null
+      "winner": "ENG"
     },
     {
       "id": "fifa-400021537",
       "stage": "QF",
       "group": null,
       "utcDate": "2026-07-12T01:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "ARG",
       "away": "SUI",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     },
     {
