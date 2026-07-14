@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-12T04:40:05.285Z",
+  "updatedAt": "2026-07-14T20:05:57.147Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1207,11 +1207,11 @@
       "stage": "SF",
       "group": null,
       "utcDate": "2026-07-14T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "FRA",
       "away": "ESP",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 1,
       "winner": null
     },
     {
