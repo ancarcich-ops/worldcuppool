@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-15T20:58:52.932Z",
+  "updatedAt": "2026-07-15T21:57:44.320Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1219,11 +1219,35 @@
       "stage": "SF",
       "group": null,
       "utcDate": "2026-07-15T19:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "ENG",
       "away": "ARG",
       "homeScore": 1,
       "awayScore": 2,
+      "winner": "ARG"
+    },
+    {
+      "id": "fifa-400021542",
+      "stage": "THIRD",
+      "group": null,
+      "utcDate": "2026-07-18T21:00:00Z",
+      "status": "SCHEDULED",
+      "home": "FRA",
+      "away": "ENG",
+      "homeScore": null,
+      "awayScore": null,
+      "winner": null
+    },
+    {
+      "id": "fifa-400021543",
+      "stage": "FINAL",
+      "group": null,
+      "utcDate": "2026-07-19T19:00:00Z",
+      "status": "SCHEDULED",
+      "home": "ESP",
+      "away": "ARG",
+      "homeScore": null,
+      "awayScore": null,
       "winner": null
     }
   ]
