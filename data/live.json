@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T21:28:44.540Z",
+  "updatedAt": "2026-07-18T22:27:29.784Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1234,8 +1234,8 @@
       "status": "LIVE",
       "home": "FRA",
       "away": "ENG",
-      "homeScore": 0,
-      "awayScore": 2,
+      "homeScore": 2,
+      "awayScore": 4,
       "winner": null
     },
     {
