@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T22:27:29.784Z",
+  "updatedAt": "2026-07-18T23:31:37.291Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1231,12 +1231,12 @@
       "stage": "THIRD",
       "group": null,
       "utcDate": "2026-07-18T21:00:00Z",
-      "status": "LIVE",
+      "status": "FINISHED",
       "home": "FRA",
       "away": "ENG",
-      "homeScore": 2,
-      "awayScore": 4,
-      "winner": null
+      "homeScore": 4,
+      "awayScore": 6,
+      "winner": "ENG"
     },
     {
       "id": "fifa-400021543",
