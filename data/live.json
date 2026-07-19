@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-18T23:31:37.291Z",
+  "updatedAt": "2026-07-19T19:32:28.601Z",
   "source": "api.fifa.com",
   "matches": [
     {
@@ -1243,11 +1243,11 @@
       "stage": "FINAL",
       "group": null,
       "utcDate": "2026-07-19T19:00:00Z",
-      "status": "SCHEDULED",
+      "status": "LIVE",
       "home": "ESP",
       "away": "ARG",
-      "homeScore": null,
-      "awayScore": null,
+      "homeScore": 0,
+      "awayScore": 0,
       "winner": null
     }
   ]
